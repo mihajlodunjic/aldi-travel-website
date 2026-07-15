@@ -73,7 +73,7 @@ export function getDestinationPriceRange(destinationSlug: string, items: TravelP
     return leftValue - rightValue;
   });
 
-  return { min: sorted[0], max: sorted.at(-1) };
+  return { min: sorted[0], max: sorted.length > 0 ? sorted[sorted.length - 1] : undefined };
 }
 
 export function getNextDepartureLabel(item: TravelPackage): string {

@@ -1,0 +1,589 @@
+- generic [active] [ref=e1]:
+  - link "Preskoči na sadržaj" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: Demo status
+      - paragraph [ref=e7]: Koncept sajta — prikazani aranžmani, termini i cene služe za demonstraciju sistema.
+    - banner [ref=e8]:
+      - generic [ref=e9]:
+        - link "Aldi Travel — početna" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e12]:
+            - strong [ref=e13]: Aldi Travel
+            - generic [ref=e14]: Leskovac
+        - navigation "Glavna navigacija" [ref=e15]:
+          - link "Aranžmani" [ref=e16] [cursor=pointer]:
+            - /url: /aranzmani
+          - link "Destinacije" [ref=e17] [cursor=pointer]:
+            - /url: /destinacije
+          - link "Last minute" [ref=e18] [cursor=pointer]:
+            - /url: /last-minute
+          - link "Sačuvano" [ref=e19] [cursor=pointer]:
+            - /url: /sacuvano
+          - link "O agenciji" [ref=e20] [cursor=pointer]:
+            - /url: /o-nama
+          - link "Kontakt" [ref=e21] [cursor=pointer]:
+            - /url: /kontakt
+        - generic [ref=e22]:
+          - link "Sačuvano" [ref=e23] [cursor=pointer]:
+            - /url: /sacuvano
+          - link "016/260-947" [ref=e25] [cursor=pointer]:
+            - /url: tel:016260947
+    - main [ref=e26]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: TABLA POLAZAKA / LESKOVAC
+          - heading "Destinaciju birate kroz termin, prevoz, ritam i cenu, ne kroz genericki slogan." [level=1] [ref=e31]
+          - paragraph [ref=e32]: Aldi Travel demo je napravljen kao radna tabla za pronalazenje polazaka. Najpre pretrazujete destinacije i mesece, zatim otvarate konkretan aranžman, birate termin, definisete putnike i pripremate demo upit.
+          - generic [ref=e33]:
+            - generic [ref=e34]: 21 aranžman
+            - generic [ref=e35]: Autobus, avion i sopstveni prevoz
+            - generic [ref=e36]: Leskovac
+          - generic [ref=e37]:
+            - link "Otvori katalog" [ref=e38] [cursor=pointer]:
+              - /url: /aranzmani
+            - link "Pregledaj last-minute" [ref=e39] [cursor=pointer]:
+              - /url: /last-minute
+          - generic [ref=e40]:
+            - generic [ref=e41]:
+              - generic [ref=e42]:
+                - strong [ref=e43]: Pronadji polazak
+                - paragraph [ref=e44]: Pretraga vodi direktno u katalog sa aktivnim filterima.
+              - paragraph [ref=e45]: Centralni flow radi od pretrage do demo upita.
+            - generic [ref=e47]:
+              - generic [ref=e48]:
+                - generic [ref=e49]: Destinacija ili država
+                - combobox "Destinacija ili država" [ref=e50]
+              - generic [ref=e51]:
+                - generic [ref=e52]: Mesec putovanja
+                - combobox "Mesec putovanja" [ref=e53]:
+                  - option "Svi meseci" [selected]
+                  - option "jul 2026."
+                  - option "avgust 2026."
+                  - option "septembar 2026."
+                  - option "oktobar 2026."
+                  - option "oktobar 2026."
+                  - option "novembar 2026."
+                  - option "decembar 2026."
+                  - option "januar 2027."
+                  - option "februar 2027."
+                  - option "april 2027."
+              - generic [ref=e54]:
+                - generic [ref=e55]: Odrasli i deca
+                - button "Odrasli i deca" [ref=e56] [cursor=pointer]:
+                  - generic [ref=e57]: 2 putnika
+                  - generic [ref=e58]: +
+              - button "Pronađi aranžmane" [ref=e59] [cursor=pointer]
+        - article [ref=e60]:
+          - img "Pogled na grčku obalu sa belim kućama i stenovitim ostrvom." [ref=e61]
+          - generic [ref=e62]:
+            - paragraph [ref=e63]: IZDVOJENA DESTINACIJA
+            - heading "Parga — Jonska obala" [level=3] [ref=e64]
+            - paragraph [ref=e65]: Lučki grad, duži autobuski boravak i nekoliko termina za poređenje tokom leta.
+            - generic [ref=e66]:
+              - generic [ref=e67]: Parga / Grčka
+              - generic [ref=e68]: Polazak 22.07.2026.
+              - generic [ref=e69]: od 199 €
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - paragraph [ref=e73]: KAKO SE CITA PONUDA
+          - generic [ref=e74]:
+            - heading "Tabla polazaka i urednicki katalog rade zajedno." [level=2] [ref=e75]
+            - paragraph [ref=e76]: Fotografija privlaci paznju, ali odluku nose datum, status polaska, vrsta prevoza i informativna cena po osobi.
+        - generic [ref=e78]:
+          - article [ref=e79]:
+            - generic [ref=e80]:
+              - paragraph [ref=e81]: SLEDECI POLASCI
+              - heading "Najblizi termini ostaju vidljivi visoko u kompoziciji." [level=3] [ref=e82]
+              - paragraph [ref=e83]: U ovom demou nema skrivenih cena i dekorativnih kartica bez funkcije. Svaki red vodi na stranicu aranžmana sa izborom termina i putnika.
+            - generic [ref=e84]:
+              - link "Parga — Jonska obala Parga / Grčka 22.07.2026. Autobuski prevoz 199 €" [ref=e85] [cursor=pointer]:
+                - /url: /aranzmani/parga-jonska-obala?departure=AT-DEMO-001-2026-07-22
+                - generic [ref=e86]:
+                  - strong [ref=e87]: Parga — Jonska obala
+                  - paragraph [ref=e88]: Parga / Grčka
+                - generic [ref=e89]: 22.07.2026.
+                - generic [ref=e90]: Autobuski prevoz
+                - strong [ref=e91]: 199 €
+              - link "Hanioti — sopstveni prevoz Hanioti / Grčka 25.07.2026. Sopstveni prevoz 319 €" [ref=e92] [cursor=pointer]:
+                - /url: /aranzmani/hanioti-sopstveni-prevoz?departure=AT-DEMO-005-2026-07-25
+                - generic [ref=e93]:
+                  - strong [ref=e94]: Hanioti — sopstveni prevoz
+                  - paragraph [ref=e95]: Hanioti / Grčka
+                - generic [ref=e96]: 25.07.2026.
+                - generic [ref=e97]: Sopstveni prevoz
+                - strong [ref=e98]: 319 €
+              - link "Evija — sever ostrva Evija / Grčka 27.07.2026. Autobuski prevoz 239 €" [ref=e99] [cursor=pointer]:
+                - /url: /aranzmani/evija-sever-ostrva?departure=AT-DEMO-002-2026-07-27
+                - generic [ref=e100]:
+                  - strong [ref=e101]: Evija — sever ostrva
+                  - paragraph [ref=e102]: Evija / Grčka
+                - generic [ref=e103]: 27.07.2026.
+                - generic [ref=e104]: Autobuski prevoz
+                - strong [ref=e105]: 239 €
+              - link "Tasos — Limenas Tasos / Grčka 30.07.2026. Autobuski prevoz 249 €" [ref=e106] [cursor=pointer]:
+                - /url: /aranzmani/tasos-limenas?departure=AT-DEMO-006-2026-07-30
+                - generic [ref=e107]:
+                  - strong [ref=e108]: Tasos — Limenas
+                  - paragraph [ref=e109]: Tasos / Grčka
+                - generic [ref=e110]: 30.07.2026.
+                - generic [ref=e111]: Autobuski prevoz
+                - strong [ref=e112]: 249 €
+              - link "Lefkada — Nidri i jonske plaže Lefkada / Grčka 03.08.2026. Autobuski prevoz 279 €" [ref=e113] [cursor=pointer]:
+                - /url: /aranzmani/lefkada-nidri-i-jonske-plaze?departure=AT-DEMO-003-2026-08-03
+                - generic [ref=e114]:
+                  - strong [ref=e115]: Lefkada — Nidri i jonske plaže
+                  - paragraph [ref=e116]: Lefkada / Grčka
+                - generic [ref=e117]: 03.08.2026.
+                - generic [ref=e118]: Autobuski prevoz
+                - strong [ref=e119]: 279 €
+          - generic [ref=e120]:
+            - article [ref=e121]:
+              - generic [ref=e122]:
+                - img "Lefkada" [ref=e123]
+                - generic [ref=e124]:
+                  - generic [ref=e125]: KATALOG 03
+                  - generic [ref=e126]: Najtraženije
+                - button "Sačuvaj aranžman Lefkada — Nidri i jonske plaže" [ref=e128] [cursor=pointer]:
+                  - generic [ref=e130]: Sačuvaj aranžman
+              - link "Lefkada / Grčka Lefkada — Nidri i jonske plaže 11 dana / 9 noćenja Autobuski prevoz Sledeći polazak 03.08.2026. od 249 € po osobi" [ref=e131] [cursor=pointer]:
+                - /url: /aranzmani/lefkada-nidri-i-jonske-plaze
+                - paragraph [ref=e132]: Lefkada / Grčka
+                - heading "Lefkada — Nidri i jonske plaže" [level=3] [ref=e133]
+                - generic [ref=e134]:
+                  - generic [ref=e135]: 11 dana / 9 noćenja
+                  - generic [ref=e136]: Autobuski prevoz
+                - generic [ref=e137]:
+                  - generic [ref=e138]: Sledeći polazak
+                  - strong [ref=e139]: 03.08.2026.
+                - generic [ref=e140]:
+                  - generic [ref=e141]: od
+                  - strong [ref=e142]: 249 €
+                  - generic [ref=e143]: po osobi
+            - article [ref=e144]:
+              - generic [ref=e145]:
+                - img "Istanbul" [ref=e146]
+                - generic [ref=e147]:
+                  - generic [ref=e148]: KATALOG 07
+                  - generic [ref=e149]: Najtraženije
+                - button "Sačuvaj aranžman Istanbul — grad na dva kontinenta" [ref=e151] [cursor=pointer]:
+                  - generic [ref=e153]: Sačuvaj aranžman
+              - link "Istanbul / Turska Istanbul — grad na dva kontinenta 5 dana / 3 noćenja Autobuski prevoz Sledeći polazak 08.10.2026. od 179 € po osobi" [ref=e154] [cursor=pointer]:
+                - /url: /aranzmani/istanbul-grad-na-dva-kontinenta
+                - paragraph [ref=e155]: Istanbul / Turska
+                - heading "Istanbul — grad na dva kontinenta" [level=3] [ref=e156]
+                - generic [ref=e157]:
+                  - generic [ref=e158]: 5 dana / 3 noćenja
+                  - generic [ref=e159]: Autobuski prevoz
+                - generic [ref=e160]:
+                  - generic [ref=e161]: Sledeći polazak
+                  - strong [ref=e162]: 08.10.2026.
+                - generic [ref=e163]:
+                  - generic [ref=e164]: od
+                  - strong [ref=e165]: 179 €
+                  - generic [ref=e166]: po osobi
+        - generic [ref=e167]:
+          - article [ref=e168]:
+            - generic [ref=e169]:
+              - img "Evija" [ref=e170]
+              - generic [ref=e171]:
+                - generic [ref=e172]: KATALOG 02
+                - generic [ref=e173]: Last minute
+              - button "Sačuvaj aranžman Evija — sever ostrva" [ref=e175] [cursor=pointer]:
+                - generic [ref=e177]: Sačuvaj aranžman
+            - link "Evija / Grčka Evija — sever ostrva 10 dana / 7 noćenja Autobuski prevoz Sledeći polazak 27.07.2026. od 229 € po osobi" [ref=e178] [cursor=pointer]:
+              - /url: /aranzmani/evija-sever-ostrva
+              - paragraph [ref=e179]: Evija / Grčka
+              - heading "Evija — sever ostrva" [level=3] [ref=e180]
+              - generic [ref=e181]:
+                - generic [ref=e182]: 10 dana / 7 noćenja
+                - generic [ref=e183]: Autobuski prevoz
+              - generic [ref=e184]:
+                - generic [ref=e185]: Sledeći polazak
+                - strong [ref=e186]: 27.07.2026.
+              - generic [ref=e187]:
+                - generic [ref=e188]: od
+                - strong [ref=e189]: 229 €
+                - generic [ref=e190]: po osobi
+          - article [ref=e191]:
+            - generic [ref=e192]:
+              - img "Kapadokija" [ref=e193]
+              - generic [ref=e194]:
+                - generic [ref=e195]: KATALOG 09
+                - generic [ref=e196]: Novo
+              - button "Sačuvaj aranžman Kapadokija i Istanbul" [ref=e198] [cursor=pointer]:
+                - generic [ref=e200]: Sačuvaj aranžman
+            - link "Kapadokija / Turska Kapadokija i Istanbul 8 dana / 6 noćenja Avion Sledeći polazak 27.09.2026. od 769 € po osobi" [ref=e201] [cursor=pointer]:
+              - /url: /aranzmani/kapadokija-i-istanbul
+              - paragraph [ref=e202]: Kapadokija / Turska
+              - heading "Kapadokija i Istanbul" [level=3] [ref=e203]
+              - generic [ref=e204]:
+                - generic [ref=e205]: 8 dana / 6 noćenja
+                - generic [ref=e206]: Avion
+              - generic [ref=e207]:
+                - generic [ref=e208]: Sledeći polazak
+                - strong [ref=e209]: 27.09.2026.
+              - generic [ref=e210]:
+                - generic [ref=e211]: od
+                - strong [ref=e212]: 769 €
+                - generic [ref=e213]: po osobi
+          - article [ref=e214]:
+            - generic [ref=e215]:
+              - img "Barselona" [ref=e216]
+              - generic [ref=e217]:
+                - generic [ref=e218]: KATALOG 17
+                - generic [ref=e219]: Novo
+              - button "Sačuvaj aranžman Barselona — arhitektura i Mediteran" [ref=e221] [cursor=pointer]:
+                - generic [ref=e223]: Sačuvaj aranžman
+            - link "Barselona / Španija Barselona — arhitektura i Mediteran 5 dana / 4 noćenja Avion Sledeći polazak 10.10.2026. od 549 € po osobi" [ref=e224] [cursor=pointer]:
+              - /url: /aranzmani/barselona-arhitektura-i-mediteran
+              - paragraph [ref=e225]: Barselona / Španija
+              - heading "Barselona — arhitektura i Mediteran" [level=3] [ref=e226]
+              - generic [ref=e227]:
+                - generic [ref=e228]: 5 dana / 4 noćenja
+                - generic [ref=e229]: Avion
+              - generic [ref=e230]:
+                - generic [ref=e231]: Sledeći polazak
+                - strong [ref=e232]: 10.10.2026.
+              - generic [ref=e233]:
+                - generic [ref=e234]: od
+                - strong [ref=e235]: 549 €
+                - generic [ref=e236]: po osobi
+      - generic [ref=e238]:
+        - generic [ref=e239]:
+          - paragraph [ref=e240]: KOREKCIJE CENA
+          - generic [ref=e241]:
+            - heading "Last-minute redovi nisu zaseban promo svet, vec deo istog kataloga." [level=2] [ref=e242]
+            - paragraph [ref=e243]: Svaki last-minute termin ostaje povezan sa konkretnim aranžmanom, datumom polaska i novom cenom.
+        - generic [ref=e245]:
+          - generic [ref=e246]:
+            - generic [ref=e247]: Aranzman
+            - generic [ref=e248]: Polazak
+            - generic [ref=e249]: Prevoz
+            - generic [ref=e250]: Pre
+            - generic [ref=e251]: Sada
+            - generic [ref=e252]: Usteda
+          - article [ref=e253]:
+            - generic [ref=e254]:
+              - link [ref=e255] [cursor=pointer]:
+                - /url: /aranzmani/parga-jonska-obala?departure=AT-DEMO-001-2026-07-22
+                - strong [ref=e256]: Parga — Jonska obala
+              - paragraph [ref=e257]: Parga / Grčka
+            - generic [ref=e258]: 22.07.2026.
+            - generic [ref=e259]: Autobuski prevoz
+            - generic [ref=e260]: 249 €
+            - strong [ref=e261]: 199 €
+            - generic [ref=e262]: "-20%"
+          - article [ref=e263]:
+            - generic [ref=e264]:
+              - link [ref=e265] [cursor=pointer]:
+                - /url: /aranzmani/evija-sever-ostrva?departure=AT-DEMO-002-2026-07-27
+                - strong [ref=e266]: Evija — sever ostrva
+              - paragraph [ref=e267]: Evija / Grčka
+            - generic [ref=e268]: 27.07.2026.
+            - generic [ref=e269]: Autobuski prevoz
+            - generic [ref=e270]: 269 €
+            - strong [ref=e271]: 239 €
+            - generic [ref=e272]: "-11%"
+          - article [ref=e273]:
+            - generic [ref=e274]:
+              - link [ref=e275] [cursor=pointer]:
+                - /url: /aranzmani/hurghada-crveno-more?departure=AT-DEMO-018-2026-08-28
+                - strong [ref=e276]: Hurghada — Crveno more
+              - paragraph [ref=e277]: Hurghada / Egipat
+            - generic [ref=e278]: 28.08.2026.
+            - generic [ref=e279]: Avion
+            - generic [ref=e280]: 699 €
+            - strong [ref=e281]: 629 €
+            - generic [ref=e282]: "-10%"
+          - article [ref=e283]:
+            - generic [ref=e284]:
+              - link [ref=e285] [cursor=pointer]:
+                - /url: /aranzmani/tunis-i-djerba?departure=AT-DEMO-019-2026-08-31
+                - strong [ref=e286]: Tunis i Đerba
+              - paragraph [ref=e287]: Đerba / Tunis
+            - generic [ref=e288]: 31.08.2026.
+            - generic [ref=e289]: Avion
+            - generic [ref=e290]: 679 €
+            - strong [ref=e291]: 599 €
+            - generic [ref=e292]: "-12%"
+      - generic [ref=e294]:
+        - generic [ref=e295]:
+          - paragraph [ref=e296]: DESTINACIJE
+          - generic [ref=e297]:
+            - heading "Pregled destinacija ima urednicki ritam, ali i dalje vodi u funkcionalan katalog." [level=2] [ref=e298]
+            - paragraph [ref=e299]: Svaka destinacija dobija sopstvenu stranicu sa uvodom, raspolozivim mesecima, cenovnim opsegom i pripadajucim aranžmanima.
+        - generic [ref=e301]:
+          - link [ref=e302] [cursor=pointer]:
+            - /url: /destinacije/parga
+            - img "Pogled na grčku obalu sa belim kućama i stenovitim ostrvom." [ref=e303]
+            - generic [ref=e304]:
+              - paragraph [ref=e305]: 01 aranžmana
+              - heading "Parga / Grčka" [level=3] [ref=e306]
+              - paragraph [ref=e307]: Polasci od 199 € po osobi.
+          - generic [ref=e308]:
+            - article [ref=e309]:
+              - link [ref=e310] [cursor=pointer]:
+                - /url: /destinacije/evija
+                - img "Plaža i tirkizna obala u Jonskom moru." [ref=e311]
+                - generic [ref=e312]:
+                  - paragraph [ref=e313]: 01 aranžmana
+                  - heading "Evija / Grčka" [level=3] [ref=e314]
+                  - paragraph [ref=e315]: od 229 €
+            - article [ref=e316]:
+              - link [ref=e317] [cursor=pointer]:
+                - /url: /destinacije/lefkada
+                - img "Dramatična uvala Lefkade sa svetlim stenama." [ref=e318]
+                - generic [ref=e319]:
+                  - paragraph [ref=e320]: 01 aranžmana
+                  - heading "Lefkada / Grčka" [level=3] [ref=e321]
+                  - paragraph [ref=e322]: od 249 €
+            - article [ref=e323]:
+              - link [ref=e324] [cursor=pointer]:
+                - /url: /destinacije/krf
+                - img "Jonska obala sa kućama i stenovitim horizontom." [ref=e325]
+                - generic [ref=e326]:
+                  - paragraph [ref=e327]: 01 aranžmana
+                  - heading "Krf / Grčka" [level=3] [ref=e328]
+                  - paragraph [ref=e329]: od 479 €
+        - generic [ref=e330]:
+          - article [ref=e331]:
+            - img "Luka sa mirnim morem i belim fasadama." [ref=e332]
+            - generic [ref=e333]:
+              - generic [ref=e334]:
+                - paragraph [ref=e335]: 01 aranžmana
+                - heading "Hanioti" [level=3] [ref=e336]
+                - paragraph [ref=e337]: Samostalni dolazak i duži boravak fokusiran na ritam dana, a ne na transfer.
+              - generic [ref=e338]:
+                - generic [ref=e339]: Grčka
+                - generic [ref=e340]: Sledeci polazak 25.07.2026.
+                - generic [ref=e341]: od 269 €
+              - generic [ref=e342]:
+                - generic [ref=e343]: jul 2026.
+                - generic [ref=e344]: avgust 2026.
+                - generic [ref=e345]: septembar 2026.
+              - generic [ref=e346]:
+                - link "Otvori destinaciju" [ref=e347] [cursor=pointer]:
+                  - /url: /destinacije/hanioti
+                - link "Prikazi aranžmane" [ref=e348] [cursor=pointer]:
+                  - /url: /aranzmani?destination=Hanioti
+          - article [ref=e349]:
+            - img "Primorski gradić sa terakota krovovima i morem." [ref=e350]
+            - generic [ref=e351]:
+              - generic [ref=e352]:
+                - paragraph [ref=e353]: 01 aranžmana
+                - heading "Tasos" [level=3] [ref=e354]
+                - paragraph [ref=e355]: Ostrvska luka i borovi kao vizuelni kontekst za autobusko letovanje.
+              - generic [ref=e356]:
+                - generic [ref=e357]: Grčka
+                - generic [ref=e358]: Sledeci polazak 30.07.2026.
+                - generic [ref=e359]: od 219 €
+              - generic [ref=e360]:
+                - generic [ref=e361]: jul 2026.
+                - generic [ref=e362]: avgust 2026.
+                - generic [ref=e363]: septembar 2026.
+              - generic [ref=e364]:
+                - link "Otvori destinaciju" [ref=e365] [cursor=pointer]:
+                  - /url: /destinacije/tasos
+                - link "Prikazi aranžmane" [ref=e366] [cursor=pointer]:
+                  - /url: /aranzmani?destination=Tasos
+          - article [ref=e367]:
+            - img "Ortakoj džamija i Bosfor pri sutonu." [ref=e368]
+            - generic [ref=e369]:
+              - generic [ref=e370]:
+                - paragraph [ref=e371]: 02 aranžmana
+                - heading "Istanbul" [level=3] [ref=e372]
+                - paragraph [ref=e373]: Grad za kraće autobuske i praznične polaske, sa jakim fokusom na datum i cenu.
+              - generic [ref=e374]:
+                - generic [ref=e375]: Turska
+                - generic [ref=e376]: Sledeci polazak 08.10.2026.
+                - generic [ref=e377]: od 179 €
+              - generic [ref=e378]:
+                - generic [ref=e379]: oktobar 2026.
+                - generic [ref=e380]: oktobar 2026.
+                - generic [ref=e381]: novembar 2026.
+                - generic [ref=e382]: februar 2027.
+              - generic [ref=e383]:
+                - link "Otvori destinaciju" [ref=e384] [cursor=pointer]:
+                  - /url: /destinacije/istanbul
+                - link "Prikazi aranžmane" [ref=e385] [cursor=pointer]:
+                  - /url: /aranzmani?destination=Istanbul
+          - article [ref=e386]:
+            - img "Večernji pogled na gradsku siluetu i obalu." [ref=e387]
+            - generic [ref=e388]:
+              - generic [ref=e389]:
+                - paragraph [ref=e390]: 01 aranžmana
+                - heading "Kapadokija" [level=3] [ref=e391]
+                - paragraph [ref=e392]: Višednevni program sa kombinacijom leta, grada i terenskog obilaska.
+              - generic [ref=e393]:
+                - generic [ref=e394]: Turska
+                - generic [ref=e395]: Sledeci polazak 27.09.2026.
+                - generic [ref=e396]: od 769 €
+              - generic [ref=e397]:
+                - generic [ref=e398]: septembar 2026.
+                - generic [ref=e399]: oktobar 2026.
+              - generic [ref=e400]:
+                - link "Otvori destinaciju" [ref=e401] [cursor=pointer]:
+                  - /url: /destinacije/kapadokija
+                - link "Prikazi aranžmane" [ref=e402] [cursor=pointer]:
+                  - /url: /aranzmani?destination=Kapadokija
+      - generic [ref=e404]:
+        - generic [ref=e405]:
+          - paragraph [ref=e406]: KATEGORIJE
+          - generic [ref=e407]:
+            - heading "Vrste putovanja imaju svoj indeks, a ne genericki red kartica." [level=2] [ref=e408]
+            - paragraph [ref=e409]: Kategorije služe kao brz ulaz u katalog za korisnike koji najpre znaju tip putovanja, a tek potom biraju konkretnu destinaciju.
+        - list [ref=e411]:
+          - listitem [ref=e412]:
+            - generic [ref=e413]: "01"
+            - generic [ref=e414]:
+              - strong [ref=e415]: Letovanje
+              - paragraph [ref=e416]: Obala, ostrva i gradske baze za duži boravak na moru.
+            - link "Otvori" [ref=e417] [cursor=pointer]:
+              - /url: /aranzmani?category=summer
+          - listitem [ref=e418]:
+            - generic [ref=e419]: "02"
+            - generic [ref=e420]:
+              - strong [ref=e421]: City break
+              - paragraph [ref=e422]: Kraći gradski polasci sa jasnim programom i cenom po osobi.
+            - link "Otvori" [ref=e423] [cursor=pointer]:
+              - /url: /aranzmani?category=city-break
+          - listitem [ref=e424]:
+            - generic [ref=e425]: "03"
+            - generic [ref=e426]:
+              - strong [ref=e427]: Evropski gradovi
+              - paragraph [ref=e428]: Kombinovani programi sa više gradova i preglednim terminima.
+            - link "Otvori" [ref=e429] [cursor=pointer]:
+              - /url: /aranzmani?category=europe
+          - listitem [ref=e430]:
+            - generic [ref=e431]: "04"
+            - generic [ref=e432]:
+              - strong [ref=e433]: Daleke destinacije
+              - paragraph [ref=e434]: Toplije destinacije sa avionskim polascima i dužim boravkom.
+            - link "Otvori" [ref=e435] [cursor=pointer]:
+              - /url: /aranzmani?category=long-haul
+          - listitem [ref=e436]:
+            - generic [ref=e437]: "05"
+            - generic [ref=e438]:
+              - strong [ref=e439]: Nova godina
+              - paragraph [ref=e440]: Praznični termini sa unapred definisanim datumima polaska.
+            - link "Otvori" [ref=e441] [cursor=pointer]:
+              - /url: /aranzmani?category=new-year
+          - listitem [ref=e442]:
+            - generic [ref=e443]: "06"
+            - generic [ref=e444]:
+              - strong [ref=e445]: Izleti
+              - paragraph [ref=e446]: Kraći programi u regionu sa autobuskim prevozom.
+            - link "Otvori" [ref=e447] [cursor=pointer]:
+              - /url: /aranzmani?category=excursion
+          - listitem [ref=e448]:
+            - generic [ref=e449]: "07"
+            - generic [ref=e450]:
+              - strong [ref=e451]: Zimovanje
+              - paragraph [ref=e452]: Zimski boravci sa fleksibilnijim individualnim dolaskom.
+            - link "Otvori" [ref=e453] [cursor=pointer]:
+              - /url: /aranzmani?category=winter
+      - generic [ref=e455]:
+        - generic [ref=e456]:
+          - paragraph [ref=e457]: CENTRALNI FLOW
+          - generic [ref=e458]:
+            - heading "Pretraga, izbor termina i demo upit rade kao jedan proizvodni tok." [level=2] [ref=e459]
+            - paragraph [ref=e460]: Nijedna kljucna kontrola nije samo dekoracija. Korisnik moze da prodje kroz ceo scenario bez napustanja smislenog putanja.
+        - generic [ref=e462]:
+          - article [ref=e463]:
+            - generic [ref=e464]: "01"
+            - heading "Pronadji destinaciju" [level=3] [ref=e465]
+            - paragraph [ref=e466]: Pretraga po destinaciji ili drzavi vodi u katalog sa aktivnim parametrima.
+          - article [ref=e467]:
+            - generic [ref=e468]: "02"
+            - heading "Filtriraj ponudu" [level=3] [ref=e469]
+            - paragraph [ref=e470]: U katalogu radite po mesecu, kategoriji, prevozu i uporednoj ceni.
+          - article [ref=e471]:
+            - generic [ref=e472]: "03"
+            - heading "Otvori aranžman" [level=3] [ref=e473]
+            - paragraph [ref=e474]: Detaljna stranica spaja galeriju, program, ukljuceno i raspolozive polaske.
+          - article [ref=e475]:
+            - generic [ref=e476]: "04"
+            - heading "Izaberi termin" [level=3] [ref=e477]
+            - paragraph [ref=e478]: Status, datum i informativna cena menjaju sazetak na booking panelu.
+          - article [ref=e479]:
+            - generic [ref=e480]: "05"
+            - heading "Posalji demo upit" [level=3] [ref=e481]
+            - paragraph [ref=e482]: Forma proverava obavezna polja i potvrđuje da je upit pripremljen.
+      - generic [ref=e484]:
+        - generic [ref=e485]:
+          - link "Aldi Travel pocetna" [ref=e486] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e488]:
+              - strong [ref=e489]: Aldi Travel
+              - generic [ref=e490]: Zajedno kreiramo uspomene
+          - paragraph [ref=e491]: Koncept sajta — prikazani aranžmani, termini i cene služe za demonstraciju sistema.
+          - paragraph [ref=e492]: "Kontakt u ovom demou ostaje lokalno jasan: Leskovac, 016/260-947, upit.alditravel@gmail.com."
+          - generic [ref=e493]:
+            - link "Kontakt i mreze" [ref=e494] [cursor=pointer]:
+              - /url: /kontakt
+            - link "Otvori sacuvane aranžmane" [ref=e495] [cursor=pointer]:
+              - /url: /sacuvano
+        - generic [ref=e496]:
+          - paragraph [ref=e497]: STA DEMO VEC RESAVA
+          - heading "Customer-facing demo nije samo naslovna strana, vec mini platforma za izbor polaska." [level=3] [ref=e498]
+          - list [ref=e499]:
+            - listitem [ref=e500]: Pronalaženje destinacija kroz pretragu, kategorije i urednicke ulaze.
+            - listitem [ref=e501]: Filtriranje i sortiranje po mesecu, tipu putovanja, vrsti prevoza i ceni.
+            - listitem [ref=e502]: Izbor konkretnog termina sa statusom raspolozivosti i informativnim obracunom.
+            - listitem [ref=e503]: Cuvanje aranžmana i priprema kontekstualnog demo upita za rezervaciju.
+    - contentinfo [ref=e504]:
+      - generic [ref=e505]:
+        - generic [ref=e507]:
+          - generic [ref=e508]:
+            - link "Aldi Travel — početna" [ref=e509] [cursor=pointer]:
+              - /url: /
+              - generic [ref=e511]:
+                - strong [ref=e512]: Aldi Travel
+                - generic [ref=e513]: Zajedno kreiramo uspomene
+            - paragraph [ref=e514]: Koncept sajta — prikazani aranžmani, termini i cene služe za demonstraciju sistema.
+            - paragraph [ref=e515]: Turistička agencija Aldi Travel · Leskovac
+          - generic [ref=e516]:
+            - heading "Indeks" [level=3] [ref=e517]
+            - list [ref=e518]:
+              - listitem [ref=e519]:
+                - link "01 · Aranžmani" [ref=e520] [cursor=pointer]:
+                  - /url: /aranzmani
+              - listitem [ref=e521]:
+                - link "02 · Destinacije" [ref=e522] [cursor=pointer]:
+                  - /url: /destinacije
+              - listitem [ref=e523]:
+                - link "03 · Last minute" [ref=e524] [cursor=pointer]:
+                  - /url: /last-minute
+              - listitem [ref=e525]:
+                - link "04 · Sačuvano" [ref=e526] [cursor=pointer]:
+                  - /url: /sacuvano
+              - listitem [ref=e527]:
+                - link "05 · O agenciji" [ref=e528] [cursor=pointer]:
+                  - /url: /o-nama
+              - listitem [ref=e529]:
+                - link "06 · Kontakt" [ref=e530] [cursor=pointer]:
+                  - /url: /kontakt
+          - generic [ref=e531]:
+            - heading "Kontakt" [level=3] [ref=e532]
+            - list [ref=e533]:
+              - listitem [ref=e534]:
+                - link "016/260-947" [ref=e535] [cursor=pointer]:
+                  - /url: tel:016260947
+              - listitem [ref=e536]:
+                - link "066-54-11777" [ref=e537] [cursor=pointer]:
+                  - /url: tel:0665411777
+              - listitem [ref=e538]:
+                - link "upit.alditravel@gmail.com" [ref=e539] [cursor=pointer]:
+                  - /url: mailto:upit.alditravel@gmail.com
+              - listitem [ref=e540]:
+                - link "Instagram · @alditravel" [ref=e541] [cursor=pointer]:
+                  - /url: https://www.instagram.com/alditravel/
+              - listitem [ref=e542]:
+                - link "Facebook · Turistička Agencija Aldi Travel" [ref=e543] [cursor=pointer]:
+                  - /url: https://www.facebook.com/alditravel/
+              - listitem [ref=e544]: TikTok · aldi_travel
+        - generic [ref=e545]:
+          - paragraph [ref=e546]: Koncept sajta — centralni flow služi demonstraciji pronalaženja aranžmana, izbora termina i slanja demo upita.
+          - paragraph [ref=e547]: Customer-facing demo bez produkcionog Offer schema.

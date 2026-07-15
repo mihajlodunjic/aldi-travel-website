@@ -1,23 +1,23 @@
 import type { Destination } from "@/types/travel";
 
 const greekBeach =
-  "https://images.unsplash.com/photo-1557353212-adb233ad2181?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000";
+  "https://images.unsplash.com/photo-1557353212-adb233ad2181?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=55&w=1600";
 const greekHarbor =
   "https://images.goway.com/production/styles/hero_s1_3xl/s3/hero_image/Sunny_summer_landscape_with_rocky_island._iStock-865108736.jpg.webp?VersionId=lh7_axpzC5NpeislbLGhpuveP7rlt01U&h=43fc81ba&itok=EhdrktnG";
 const athensAcropolis =
-  "https://images.unsplash.com/photo-1656677476414-d6b18ba0ad73?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000";
+  "https://images.unsplash.com/photo-1656677476414-d6b18ba0ad73?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=55&w=1600";
 const istanbulBosphorus =
-  "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&ixlib=rb-4.1.0&q=80&w=2560";
+  "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==&ixlib=rb-4.1.0&q=55&w=1600";
 const istanbulHistoric =
-  "https://images.unsplash.com/photo-1570852006699-e4f82b34d3f7?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000";
+  "https://images.unsplash.com/photo-1570852006699-e4f82b34d3f7?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=55&w=1600";
 const budapestParliament =
-  "https://images.unsplash.com/photo-1698657792682-48f73d9d0b8c?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000";
+  "https://images.unsplash.com/photo-1698657792682-48f73d9d0b8c?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=55&w=1600";
 const viennaStreet =
-  "https://images.unsplash.com/photo-1573167443175-867d91708f97?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000";
+  "https://images.unsplash.com/photo-1573167443175-867d91708f97?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=55&w=1600";
 const romeStreet =
-  "https://images.unsplash.com/photo-1634633112235-2d46212c60f7?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000";
+  "https://images.unsplash.com/photo-1634633112235-2d46212c60f7?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=55&w=1600";
 const parisStreet =
-  "https://images.unsplash.com/photo-1752167079765-f805684f1a91?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=3000";
+  "https://images.unsplash.com/photo-1752167079765-f805684f1a91?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=55&w=1600";
 
 export const destinations: Destination[] = [
   {

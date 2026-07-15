@@ -11,14 +11,33 @@ function parseIds(value: string | null): string[] {
   }
 }
 
+function readFavoritesStorage(): string | null {
+  if (typeof window === "undefined") return null;
+
+  try {
+    return window.localStorage.getItem(FAVORITES_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function writeFavoritesStorage(ids: string[]): boolean {
+  if (typeof window === "undefined") return false;
+
+  try {
+    window.localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(ids));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function getSavedPackageIds(): string[] {
-  if (typeof window === "undefined") return [];
-  return parseIds(window.localStorage.getItem(FAVORITES_STORAGE_KEY));
+  return parseIds(readFavoritesStorage());
 }
 
 export function persistSavedPackageIds(ids: string[]): void {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(ids));
+  if (!writeFavoritesStorage(ids) || typeof window === "undefined") return;
   window.dispatchEvent(new CustomEvent("favorites:change", { detail: ids }));
 }
 

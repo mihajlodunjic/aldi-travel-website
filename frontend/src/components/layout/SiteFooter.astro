@@ -1,0 +1,55 @@
+---
+import { agency } from "@/data/agency";
+import { navigation } from "@/data/navigation";
+---
+<footer class="footer-shell">
+  <div class="container footer-inner">
+    <div class="double-rule" aria-hidden="true"></div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand-link" href="/" aria-label="Aldi Travel — početna">
+          <span class="brand-link__logo">
+            <img src={agency.logoPath} alt="" width="1080" height="1080" loading="lazy" />
+          </span>
+          <span class="brand-link__text">
+            <strong class="brand-link__name">{agency.name}</strong>
+            <span class="brand-link__city">{agency.slogan}</span>
+          </span>
+        </a>
+        <p>{agency.notice}</p>
+        <p>{agency.fullName} · {agency.city}</p>
+      </div>
+
+      <div>
+        <h3>Indeks</h3>
+        <ul class="footer-nav-list">
+          {navigation.map((item) => (
+            <li>
+              <a href={item.href}>
+                {item.index} · {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3>Kontakt</h3>
+        <ul class="footer-contact-list">
+          {agency.phones.map((phone) => (
+            <li><a href={`tel:${phone.value.replace(/[^\d+]/g, "")}`}>{phone.value}</a></li>
+          ))}
+          <li><a href={`mailto:${agency.email.value}`}>{agency.email.value}</a></li>
+          {agency.social.map((item) => (
+            <li>{item.href ? <a href={item.href} target="_blank" rel="noreferrer">{item.label} · {item.value}</a> : `${item.label} · ${item.value}`}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-meta">
+      <p>Koncept sajta — centralni flow služi demonstraciji pronalaženja aranžmana, izbora termina i slanja demo upita.</p>
+      <p>Customer-facing demo bez produkcionog Offer schema.</p>
+    </div>
+  </div>
+</footer>

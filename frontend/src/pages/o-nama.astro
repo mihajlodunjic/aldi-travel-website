@@ -1,0 +1,86 @@
+---
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { agency } from "@/data/agency";
+---
+<BaseLayout
+  title="O agenciji | Aldi Travel demo"
+  description="Kontekst customer-facing demo sajta za Aldi Travel: lokalna agencija, katalog polazaka i produktna logika bez neproverenih tvrdnji."
+>
+  <section class="section section--tight">
+    <div class="container">
+      <Breadcrumbs items={[{ href: "/", label: "Pocetna" }, { label: "O agenciji" }]} />
+
+      <div class="page-intro">
+        <p class="eyebrow">LOKALNI KONTEKST</p>
+        <h1>Aldi Travel je ovde predstavljen kao neposredna leskovacka agencija sa jakom tablom polazaka.</h1>
+        <p>
+          Stranica namerno ne izmišlja statistike, recenzije, licence i biografske detalje koje brief ne potvrđuje.
+          Fokus je na tome kako sajt radi, kako izgleda i kako korisnik kroz njega donosi odluku.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container agency-block">
+      <div class="agency-block__brand">
+        <a class="brand-link" href="/" aria-label="Aldi Travel pocetna">
+          <span class="brand-link__logo">
+            <img src={agency.logoPath} alt="" width="1080" height="1080" loading="lazy" />
+          </span>
+          <span class="brand-link__text">
+            <strong class="brand-link__name">{agency.name}</strong>
+            <span class="brand-link__city">{agency.city}</span>
+          </span>
+        </a>
+        <p>{agency.notice}</p>
+        <p>{agency.slogan}</p>
+      </div>
+
+      <div class="final-cta-panel">
+        <p class="eyebrow">STA SAJT POKAZUJE</p>
+        <h3>Demo je napravljen kao mini platforma za pregled ponude, ne kao klasicna naslovna strana.</h3>
+        <ul class="stack-list">
+          <li>Pronalaženje destinacija kroz pretragu, indeks kategorija i stranice destinacija.</li>
+          <li>Otvaranje aranžmana sa programom, ukljucenim stavkama i raspolozivim terminima.</li>
+          <li>Izbor putnika i automatsko osvezavanje informativnog obracuna.</li>
+          <li>Slanje demo upita koji proverava polja i potvrđuje pripremu zahteva.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHeader
+        eyebrow="PRODUKTNI PRINCIPI"
+        title="Sajt je namerno gust i informativan, ali ostaje citljiv."
+        text="Dizajn koristi datume, polaske, trajanje, prevoz i cenu kao glavni vizuelni materijal, umesto generickih ilustracija i marketinskog šuma."
+      />
+
+      <div class="detail-columns">
+        <section class="detail-card list-block">
+          <h3>Sta je namerno ukljuceno</h3>
+          <ul>
+            <li>Funkcionalna pretraga, filtriranje, sortiranje i cuvanje aranžmana.</li>
+            <li>Detaljna stranica sa galerijom, terminima i booking panelom.</li>
+            <li>Diskretna demo oznaka koja jasno objašnjava status podataka.</li>
+            <li>Kontakt kontekst agencije bez preterane dekoracije i nepotvrđenih tvrdnji.</li>
+          </ul>
+        </section>
+
+        <section class="detail-card list-block list-block--accent">
+          <h3>Sta je namerno izostavljeno</h3>
+          <ul>
+            <li>Neproverene ocene, recenzije, nagrade, partnerstva i broj putnika.</li>
+            <li>Produkcioni Offer structured data za mock aranžmane.</li>
+            <li>Tacna adresa, mapa, PIB i radno vreme koji nisu potvrđeni.</li>
+            <li>Lazna hitnost i marketinski obrasci koji narusavaju poverenje.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

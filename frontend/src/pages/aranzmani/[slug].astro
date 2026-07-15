@@ -1,0 +1,178 @@
+---
+import AccommodationSection from "@/components/packages/AccommodationSection.astro";
+import BookingExperience from "@/components/booking/BookingExperience";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import IncludedExcluded from "@/components/packages/IncludedExcluded.astro";
+import Itinerary from "@/components/packages/Itinerary.astro";
+import PackageGallery from "@/components/packages/PackageGallery";
+import RelatedPackages from "@/components/packages/RelatedPackages.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { destinationMap } from "@/data/destinations";
+import { travelPackages } from "@/data/travelPackages";
+import type { TravelPackage } from "@/types/travel";
+import { formatTravelDate, formatTravelMonth } from "@/utils/dates";
+import {
+  getAvailableDepartures,
+  getCategoryLabel,
+  getLastMinuteDepartures,
+  getNextAvailableDeparture,
+  getRelatedPackages,
+  getTransportLabel,
+} from "@/utils/packages";
+
+export async function getStaticPaths() {
+  return travelPackages.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+interface Props {
+  item: TravelPackage;
+}
+
+const { item } = Astro.props;
+const destination = destinationMap.get(item.destinationSlug);
+const availableDepartures = getAvailableDepartures(item);
+const nextDeparture = getNextAvailableDeparture(item);
+const relatedPackages = getRelatedPackages(item, travelPackages);
+const lastMinuteCount = getLastMinuteDepartures(item).length;
+const breadcrumbStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Pocetna", item: "/" },
+    { "@type": "ListItem", position: 2, name: "Aranzmani", item: "/aranzmani" },
+    { "@type": "ListItem", position: 3, name: item.title, item: `/aranzmani/${item.slug}` },
+  ],
+};
+---
+<BaseLayout
+  title={`${item.title} | Aldi Travel demo`}
+  description={item.shortDescription}
+  structuredData={breadcrumbStructuredData}
+>
+  <section class="section section--tight">
+    <div class="container">
+      <Breadcrumbs
+        items={[
+          { href: "/", label: "Pocetna" },
+          { href: "/aranzmani", label: "Aranzmani" },
+          { label: item.title },
+        ]}
+      />
+
+      <header class="detail-header">
+        <p class="eyebrow">{getCategoryLabel(item.category)}</p>
+        <h1>{item.title}</h1>
+        <p>{item.description}</p>
+
+        <div class="detail-header__meta">
+          <span class="data-pill">Katalog {String(item.catalogNumber).padStart(2, "0")}</span>
+          <span class="data-pill">{item.destination} / {item.country}</span>
+          <span class="data-pill">{item.durationDays} dana / {item.nights} nocenja</span>
+          <span class="data-pill">{getTransportLabel(item.transportType)}</span>
+          {item.departurePoint ? <span class="data-pill">Polazak {item.departurePoint}</span> : null}
+        </div>
+
+        <div class="note-box">
+          <strong>Demo napomena.</strong>
+          <p>
+            Raspolozivost, termini i cene na ovoj stranici nisu produkciona ponuda. Sluze proveri UX toka od izbora
+            aranžmana do slanja demo upita.
+          </p>
+        </div>
+      </header>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <PackageGallery
+        title={item.title}
+        images={item.images}
+        alt={destination?.alt ?? item.images.map((_, index) => `${item.title} ${index + 1}`)}
+        client:visible
+      />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="stat-grid">
+        <article class="stat-card">
+          <p class="eyebrow">SLEDECI POLAZAK</p>
+          <h3>{nextDeparture ? formatTravelDate(nextDeparture.startDate) : "Po dogovoru sa agentom"}</h3>
+          <p>{availableDepartures.length > 0 ? `${availableDepartures.length} dostupna termina u demou.` : "Trenutno nema aktivnog termina."}</p>
+        </article>
+        <article class="stat-card">
+          <p class="eyebrow">STATUS TERMINA</p>
+          <h3>{lastMinuteCount > 0 ? "Last-minute ukljucen" : "Standardni ritam prodaje"}</h3>
+          <p>Odrasli menjaju informativni obracun odmah na booking panelu, dok se cena za decu potvrđuje preko agenta.</p>
+        </article>
+        <article class="stat-card">
+          <p class="eyebrow">MESTO U KATALOGU</p>
+          <h3>{destination?.label ?? item.destination}</h3>
+          <p>{nextDeparture ? `Prvi aktivni mesec: ${formatTravelMonth(nextDeparture.startDate.slice(0, 7))}.` : "Agent predlaze sledece raspolozive polaske."}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <BookingExperience item={item} client:load />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <IncludedExcluded included={item.included} excluded={item.excluded} />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <Itinerary items={item.itinerary} />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container detail-columns">
+      <section class="detail-card list-block">
+        <h3>Prakticne napomene</h3>
+        <ul>
+          {item.practicalNotes.map((note) => <li>{note}</li>)}
+          {item.baggageNote ? <li>{item.baggageNote}</li> : null}
+          <li>Cene za decu se potvrđuju kroz komunikaciju sa agentom.</li>
+        </ul>
+      </section>
+
+      <section class="detail-card list-block list-block--accent">
+        <h3>Fakultativni i dodatni programi</h3>
+        <ul>
+          {item.optionalExcursions.length > 0 ? (
+            item.optionalExcursions.map((excursion) => (
+              <li>
+                {excursion.name}
+                {excursion.price && excursion.currency ? ` - ${excursion.price} ${excursion.currency}` : ""}
+              </li>
+            ))
+          ) : (
+            <li>Za ovaj demo aranžman dodatni program nije posebno izdvojen.</li>
+          )}
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <AccommodationSection accommodation={item.accommodation} />
+    </div>
+  </section>
+
+  <div class="container">
+    <RelatedPackages items={relatedPackages} />
+  </div>
+</BaseLayout>

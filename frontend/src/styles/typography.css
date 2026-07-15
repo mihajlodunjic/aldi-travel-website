@@ -1,0 +1,64 @@
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-size: clamp(42px, 5.2vw, 82px);
+  line-height: 0.98;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.05;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+p {
+  color: var(--color-ink-muted);
+}
+
+.eyebrow,
+.meta-label,
+.catalog-chip,
+.status-chip,
+.data-pill,
+.utility-note {
+  font-family: var(--font-data);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  font-size: 12px;
+  color: var(--color-orange-deep);
+}
+
+.data-copy,
+.package-card__departure-line strong,
+.booking-total,
+.money-inline,
+.mono-date {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+}

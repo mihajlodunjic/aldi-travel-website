@@ -1,0 +1,100 @@
+---
+import DestinationSummaryCard from "@/components/destinations/DestinationSummaryCard.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { destinations } from "@/data/destinations";
+import { travelPackages } from "@/data/travelPackages";
+import { getDestinationPackageCount, getDestinationPriceRange } from "@/utils/packages";
+import { formatMoney } from "@/utils/pricing";
+
+const sortedDestinations = [...destinations].sort((left, right) => {
+  const leftCount = getDestinationPackageCount(left.slug, travelPackages);
+  const rightCount = getDestinationPackageCount(right.slug, travelPackages);
+  if (leftCount !== rightCount) return rightCount - leftCount;
+  return left.name.localeCompare(right.name, "sr-Latn-RS");
+});
+
+const spotlight = sortedDestinations.slice(0, 4).map((destination) => ({
+  destination,
+  count: getDestinationPackageCount(destination.slug, travelPackages),
+  priceRange: getDestinationPriceRange(destination.slug, travelPackages),
+}));
+---
+<BaseLayout
+  title="Destinacije | Aldi Travel demo"
+  description="Pregled destinacija u demo katalogu Aldi Travel sa urednickim uvodom, cenovnim opsegom i vezom ka konkretnim aranžmanima."
+>
+  <section class="section section--tight">
+    <div class="container">
+      <Breadcrumbs items={[{ href: "/", label: "Pocetna" }, { label: "Destinacije" }]} />
+
+      <div class="page-intro">
+        <p class="eyebrow">INDEKS DESTINACIJA</p>
+        <h1>Destinacije nisu skup nasumicnih slika, vec ulazi u konkretne polaske.</h1>
+        <p>
+          Svaka destinacija ima sopstveni uvod, pregled dostupnih meseci i povezane aranžmane. Tako korisnik moze da
+          krene od mesta koje ga zanima, a da i dalje brzo dodje do termina i cene.
+        </p>
+      </div>
+
+      <div class="note-box">
+        <strong>Kako se koristi ovaj indeks.</strong>
+        <p>
+          Ako korisnik vec zna mesto koje ga zanima, destinacija postaje najbrzi ulaz u katalog. Ako jos vaga, na
+          istoj stranici vidi koliki je obim ponude i od kog cenovnog nivoa krece demo ponuda.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="destination-mosaic">
+        <a class="destination-mosaic__feature" href={`/destinacije/${spotlight[0].destination.slug}`}>
+          <img src={spotlight[0].destination.heroImage} alt={spotlight[0].destination.alt[0] ?? spotlight[0].destination.label} width="1600" height="2000" loading="eager" />
+          <div class="destination-card__caption">
+            <p class="destination-card__kicker">{String(spotlight[0].count).padStart(2, "0")} aranžmana</p>
+            <h3>{spotlight[0].destination.label}</h3>
+            <p>
+              {spotlight[0].priceRange.min
+                ? `Polasci od ${formatMoney(spotlight[0].priceRange.min.pricePerPerson, spotlight[0].priceRange.min.currency)} po osobi.`
+                : "Cena se potvrđuje po terminu."}
+            </p>
+          </div>
+        </a>
+
+        <div class="destination-mosaic__stack">
+          {spotlight.slice(1).map(({ destination, count, priceRange }) => (
+            <article>
+              <a href={`/destinacije/${destination.slug}`}>
+                <img src={destination.heroImage} alt={destination.alt[0] ?? destination.label} width="1600" height="1000" loading="lazy" />
+                <div class="destination-card__caption">
+                  <p class="destination-card__kicker">{String(count).padStart(2, "0")} aranžmana</p>
+                  <h3>{destination.label}</h3>
+                  <p>{priceRange.min ? `od ${formatMoney(priceRange.min.pricePerPerson, priceRange.min.currency)}` : "Cena na upit"}</p>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHeader
+        eyebrow="SVE DESTINACIJE"
+        title="Svaka kartica vodi na stranicu destinacije i dalje u konkretan aranžman."
+        text="Pored uvodnog opisa prikazani su obim ponude, naredni aktivni termini i cenovni prag demo podataka."
+      />
+
+      <div class="destination-summary-grid">
+        {sortedDestinations.map((destination) => (
+          <DestinationSummaryCard destination={destination} packages={travelPackages} />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

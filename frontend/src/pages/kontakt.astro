@@ -1,0 +1,82 @@
+---
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { agency } from "@/data/agency";
+---
+<BaseLayout
+  title="Kontakt | Aldi Travel demo"
+  description="Kontakt stranica Aldi Travel demo sajta sa telefonom, email adresom, drustvenim mrezama i objasnjenjem kako demo upit funkcioniše."
+>
+  <section class="section section--tight">
+    <div class="container">
+      <Breadcrumbs items={[{ href: "/", label: "Pocetna" }, { label: "Kontakt" }]} />
+
+      <div class="page-intro">
+        <p class="eyebrow">KONTAKT I DRUSTVENE MREZE</p>
+        <h1>Kontakt ostaje jasan i lokalno orijentisan, bez izmišljenih podataka.</h1>
+        <p>
+          U ovoj prezentacionoj verziji prikazujemo samo potvrđene kontakt tacke iz briefa: telefone, email, gradski
+          kontekst i drustvene mreze koje su eksplicitno navedene.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <article class="contact-card">
+          <p class="eyebrow">TELEFON</p>
+          <h3>Poziv ili brz dogovor</h3>
+          <ul class="stack-list">
+            {agency.phones.map((phone) => (
+              <li><a href={`tel:${phone.value.replace(/[^\d+]/g, "")}`}>{phone.value}</a></li>
+            ))}
+          </ul>
+        </article>
+
+        <article class="contact-card">
+          <p class="eyebrow">EMAIL</p>
+          <h3>Demo upiti i dodatna pitanja</h3>
+          <ul class="stack-list">
+            <li><a href={`mailto:${agency.email.value}`}>{agency.email.value}</a></li>
+            <li>{agency.city}</li>
+          </ul>
+        </article>
+
+        <article class="contact-card">
+          <p class="eyebrow">MREZE</p>
+          <h3>Kanali iz briefa</h3>
+          <ul class="stack-list">
+            {agency.social.map((item) => (
+              <li>{item.href ? <a href={item.href} target="_blank" rel="noreferrer">{item.label} - {item.value}</a> : `${item.label} - ${item.value}`}</li>
+            ))}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container final-cta-block">
+      <div class="detail-card list-block">
+        <h3>Kako radi demo upit za rezervaciju</h3>
+        <ul>
+          <li>Korisnik u katalogu pronalazi aranžman i otvara detaljnu stranicu.</li>
+          <li>Na detalju bira konkretan termin i broj odraslih i dece.</li>
+          <li>Booking panel racuna informativni zbir za odrasle i proverava obavezna polja.</li>
+          <li>Po slanju forma prikazuje potvrdu da je demo upit pripremljen.</li>
+        </ul>
+      </div>
+
+      <div class="final-cta-panel">
+        <p class="eyebrow">SLEDECI KORAK</p>
+        <h3>Ako zelite da testirate tok, krenite iz kataloga ili otvorite vec sacuvane aranžmane.</h3>
+        <div class="page-actions">
+          <a class="button button--primary" href="/aranzmani">
+            Idi u katalog
+          </a>
+          <a class="button button--secondary" href="/sacuvano">
+            Otvori sacuvano
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

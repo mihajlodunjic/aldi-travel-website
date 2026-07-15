@@ -1,0 +1,55 @@
+---
+import FavoriteButton from "@/components/favorites/FavoriteButton";
+import type { TravelPackage } from "@/types/travel";
+import { formatTravelDateCompact } from "@/utils/dates";
+import {
+  getCatalogLabel,
+  getNextAvailableDeparture,
+  getPackageStartingPrice,
+  getStatusBadge,
+  getTransportLabel,
+} from "@/utils/packages";
+import { formatMoney } from "@/utils/pricing";
+
+interface Props {
+  item: TravelPackage;
+}
+
+const { item } = Astro.props;
+const nextDeparture = getNextAvailableDeparture(item);
+const status = getStatusBadge(item);
+const starting = getPackageStartingPrice(item);
+---
+<article class="package-card">
+  <div class="package-card__media">
+    <img src={item.images[0]} alt={item.destination} width="960" height="720" loading="lazy" />
+    <div class="package-card__topline">
+      <span class="catalog-chip">{getCatalogLabel(item.catalogNumber)}</span>
+      {status ? <span class="status-chip">{status}</span> : null}
+    </div>
+    <FavoriteButton packageId={item.id} packageTitle={item.title} client:idle />
+  </div>
+  <a class="package-card__body" href={`/aranzmani/${item.slug}`}>
+    <p class="package-card__place">{item.destination} / {item.country}</p>
+    <h3>{item.title}</h3>
+    <div class="package-card__meta">
+      <span>{item.durationDays} dana / {item.nights} noćenja</span>
+      <span>{getTransportLabel(item.transportType)}</span>
+    </div>
+    <div class="package-card__departure-line">
+      <span>Sledeći polazak</span>
+      <strong>{nextDeparture ? formatTravelDateCompact(nextDeparture.startDate) : "Nema dostupnog termina"}</strong>
+    </div>
+    <div class="package-card__price">
+      {starting ? (
+        <>
+          <span class="package-card__price-label">od</span>
+          <strong>{formatMoney(starting.pricePerPerson, starting.currency)}</strong>
+          <span>po osobi</span>
+        </>
+      ) : (
+        <strong>Cena na upit</strong>
+      )}
+    </div>
+  </a>
+</article>

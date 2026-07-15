@@ -1,0 +1,35 @@
+---
+import SavedPackages from "@/components/favorites/SavedPackages";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { travelPackages } from "@/data/travelPackages";
+---
+<BaseLayout
+  title="Sacuvani aranžmani | Aldi Travel demo"
+  description="Lokalno sacuvani aranžmani u demo sajtu Aldi Travel za kasnije poređenje i povratak na detaljne stranice."
+>
+  <section class="section section--tight">
+    <div class="container">
+      <Breadcrumbs items={[{ href: "/", label: "Pocetna" }, { label: "Sacuvano" }]} />
+
+      <div class="page-intro">
+        <p class="eyebrow">LOKALNO SACUVANO</p>
+        <h1>Sacuvani aranžmani ostaju pri ruci dok poredite termine i cene.</h1>
+        <p>
+          Ova lista koristi lokalno cuvanje u pregledaču. Ideja je da korisnik ne izgubi aranžmane koje zeli da otvori
+          kasnije ili da uporedi sa drugom destinacijom.
+        </p>
+      </div>
+
+      <div class="note-box note-box--spaced">
+        <strong>Kako radi cuvanje.</strong>
+        <p>
+          Klik na marker "Sacuvaj aranžman" upisuje izbor u lokalnu memoriju pregledača i odmah osvezava broj u
+          headeru. Demo ne koristi nalog korisnika niti backend.
+        </p>
+      </div>
+
+      <SavedPackages packages={travelPackages} client:load />
+    </div>
+  </section>
+</BaseLayout>

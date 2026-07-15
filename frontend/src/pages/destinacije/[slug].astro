@@ -1,0 +1,169 @@
+---
+import DestinationSummaryCard from "@/components/destinations/DestinationSummaryCard.astro";
+import LastMinuteLedger from "@/components/last-minute/LastMinuteLedger.astro";
+import PackageCard from "@/components/packages/PackageCard.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { destinations } from "@/data/destinations";
+import { travelPackages } from "@/data/travelPackages";
+import type { Destination } from "@/types/travel";
+import { formatTravelMonth } from "@/utils/dates";
+import {
+  getDestinationHero,
+  getDestinationMonthlyAvailability,
+  getDestinationPriceRange,
+  getLastMinuteDepartures,
+  getPackageStartingPrice,
+} from "@/utils/packages";
+import { formatMoney } from "@/utils/pricing";
+
+export async function getStaticPaths() {
+  return destinations.map((destination) => ({
+    params: { slug: destination.slug },
+    props: { destination },
+  }));
+}
+
+interface Props {
+  destination: Destination;
+}
+
+const { destination } = Astro.props;
+const items = travelPackages.filter((item) => item.destinationSlug === destination.slug);
+const heroPackage = getDestinationHero(travelPackages, destination);
+const months = getDestinationMonthlyAvailability(destination.slug, travelPackages);
+const priceRange = getDestinationPriceRange(destination.slug, travelPackages);
+const lastMinuteEntries = items
+  .flatMap((item) => getLastMinuteDepartures(item).map((departure) => ({ item, departure })))
+  .sort((left, right) => left.departure.startDate.localeCompare(right.departure.startDate));
+const relatedDestinations = destinations
+  .filter((item) => item.countrySlug === destination.countrySlug && item.slug !== destination.slug)
+  .slice(0, 3);
+const heroStartingPrice = heroPackage ? getPackageStartingPrice(heroPackage) : undefined;
+---
+<BaseLayout
+  title={`${destination.label} | Aldi Travel demo`}
+  description={destination.intro}
+>
+  <section class="section section--tight">
+    <div class="container">
+      <Breadcrumbs
+        items={[
+          { href: "/", label: "Pocetna" },
+          { href: "/destinacije", label: "Destinacije" },
+          { label: destination.label },
+        ]}
+      />
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">{destination.country}</p>
+          <h1>{destination.name}</h1>
+          <p>{destination.intro}</p>
+          <p>{destination.editorial}</p>
+
+          <div class="hero-data-row">
+            <span class="data-pill">{items.length} aranžman</span>
+            <span class="data-pill">{months.length} meseci polazaka</span>
+            <span class="data-pill">{heroStartingPrice ? `od ${formatMoney(heroStartingPrice.pricePerPerson, heroStartingPrice.currency)}` : "Cena na upit"}</span>
+          </div>
+
+          <div class="page-actions">
+            <a class="button button--primary" href={`/aranzmani?destination=${encodeURIComponent(destination.name)}`}>
+              Prikazi aranžmane
+            </a>
+            <a class="button button--secondary" href={`/aranzmani?country=${encodeURIComponent(destination.country)}`}>
+              Sva ponuda za drzavu
+            </a>
+          </div>
+        </div>
+
+        <article class="hero-visual">
+          <img src={destination.heroImage} alt={destination.alt[0] ?? destination.label} width="1800" height="1350" loading="eager" />
+          <div class="hero-caption">
+            <p class="destination-card__kicker">MESECI I CENOVNI OPSEG</p>
+            <h3>{destination.label}</h3>
+            <p>
+              {priceRange.min && priceRange.max
+                ? `Demo ponuda za ovu destinaciju ide od ${formatMoney(priceRange.min.pricePerPerson, priceRange.min.currency)} do ${formatMoney(priceRange.max.pricePerPerson, priceRange.max.currency)} po osobi, zavisno od termina i programa.`
+                : "Cena se potvrđuje tek po izboru termina."}
+            </p>
+            {months.length > 0 ? (
+              <div class="month-chip-row">
+                {months.map((month) => (
+                  <span class="month-chip">{formatTravelMonth(month)}</span>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="stat-grid">
+        <article class="stat-card">
+          <p class="eyebrow">ARANZMANI</p>
+          <h3>{items.length}</h3>
+          <p>Svaki vodi u detaljnu stranicu sa izborom termina i slanjem demo upita.</p>
+        </article>
+        <article class="stat-card">
+          <p class="eyebrow">POCETNA CENA</p>
+          <h3>{priceRange.min ? formatMoney(priceRange.min.pricePerPerson, priceRange.min.currency) : "Cena na upit"}</h3>
+          <p>Cena zavisi od termina, vrste prevoza i statusa polaska u demo podacima.</p>
+        </article>
+        <article class="stat-card">
+          <p class="eyebrow">LAST-MINUTE</p>
+          <h3>{lastMinuteEntries.length > 0 ? `${lastMinuteEntries.length} termina` : "Trenutno bez korekcije cene"}</h3>
+          <p>Last-minute redovi ostaju deo istog kataloga i vode na konkretan aranžman.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {lastMinuteEntries.length > 0 ? (
+    <section class="section section--tight">
+      <div class="container">
+        <SectionHeader
+          eyebrow="LAST-MINUTE NA DESTINACIJI"
+          title="Korekcije cena su vezane za konkretne polaske."
+          text="Ako destinacija ima aktivan last-minute termin, prikazan je ovde sa datumom, starom cenom i novom cenom."
+        />
+        <LastMinuteLedger entries={lastMinuteEntries} />
+      </div>
+    </section>
+  ) : null}
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHeader
+        eyebrow="ARANZMANI ZA DESTINACIJU"
+        title="Ponuda za ovu destinaciju ostaje pregledna i kada se razlikuju termini i prevoz."
+        text="Otvaranjem kartice dobijate galeriju, program putovanja, raspolozive termine, informativni obracun i formu za demo upit."
+      />
+      <div class="package-grid">
+        {items.map((item) => <PackageCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  {relatedDestinations.length > 0 ? (
+    <section class="section section--tight">
+      <div class="container">
+        <SectionHeader
+          eyebrow="JOS U ISTOJ DRZAVI"
+          title="Ako korisnik vaga lokacije, moze da ostane u istom geografskom kontekstu."
+          text="Povezane destinacije nude drugi ritam boravka, ali zadrzavaju isti katalogski nacin poređenja termina i cena."
+        />
+        <div class="destination-summary-grid">
+          {relatedDestinations.map((item) => (
+            <DestinationSummaryCard destination={item} packages={travelPackages} />
+          ))}
+        </div>
+      </div>
+    </section>
+  ) : null}
+</BaseLayout>

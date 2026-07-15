@@ -1,0 +1,22 @@
+---
+interface Props {
+  included: string[];
+  excluded: string[];
+}
+
+const { included, excluded } = Astro.props;
+---
+<div class="detail-columns">
+  <section class="detail-card list-block">
+    <h3>Cena uključuje</h3>
+    <ul>
+      {included.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+  <section class="detail-card list-block list-block--accent">
+    <h3>Cena ne uključuje</h3>
+    <ul>
+      {excluded.map((item) => <li>{item}</li>)}
+    </ul>
+  </section>
+</div>

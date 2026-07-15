@@ -1,0 +1,63 @@
+---
+import DemoNotice from "@/components/layout/DemoNotice.astro";
+import SiteFooter from "@/components/layout/SiteFooter.astro";
+import SiteHeader from "@/components/layout/SiteHeader.astro";
+import SeoHead from "@/components/seo/SeoHead.astro";
+import { agency } from "@/data/agency";
+import { siteConfig } from "@/data/site";
+import "@fontsource/source-serif-4/600.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-sans/700.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@/styles/reset.css";
+import "@/styles/tokens.css";
+import "@/styles/typography.css";
+import "@/styles/utilities.css";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { title, description, structuredData } = Astro.props;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  name: agency.name,
+  url: Astro.site?.toString(),
+  email: agency.email.value,
+  telephone: agency.phones[0].value,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: agency.city,
+    addressCountry: "RS",
+  },
+};
+
+const mergedStructuredData = structuredData
+  ? Array.isArray(structuredData)
+    ? [organizationSchema, ...structuredData]
+    : [organizationSchema, structuredData]
+  : organizationSchema;
+---
+<!doctype html>
+<html lang={siteConfig.lang}>
+  <head>
+    <SeoHead title={title} description={description} structuredData={mergedStructuredData} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Preskoči na sadržaj</a>
+    <div class="site-shell">
+      <DemoNotice />
+      <SiteHeader />
+      <main id="main-content">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+  </body>
+</html>

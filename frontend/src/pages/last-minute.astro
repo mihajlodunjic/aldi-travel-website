@@ -1,0 +1,56 @@
+---
+import LastMinuteLedger from "@/components/last-minute/LastMinuteLedger.astro";
+import PackageCard from "@/components/packages/PackageCard.astro";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { travelPackages } from "@/data/travelPackages";
+import { getLastMinuteDepartures } from "@/utils/packages";
+
+const entries = travelPackages
+  .flatMap((item) => getLastMinuteDepartures(item).map((departure) => ({ item, departure })))
+  .sort((left, right) => left.departure.startDate.localeCompare(right.departure.startDate));
+const packagesWithLastMinute = travelPackages.filter((item) => getLastMinuteDepartures(item).length > 0);
+---
+<BaseLayout
+  title="Last-minute termini | Aldi Travel demo"
+  description="Pregled demo last-minute polazaka Aldi Travel sa datumom, korekcijom cene i prelazom na konkretan aranžman."
+>
+  <section class="section section--tight">
+    <div class="container">
+      <Breadcrumbs items={[{ href: "/", label: "Pocetna" }, { label: "Last-minute" }]} />
+
+      <div class="page-intro">
+        <p class="eyebrow">LAST-MINUTE TABLA</p>
+        <h1>Last-minute nije odvojen carousel, vec uredan red polazaka sa novom cenom.</h1>
+        <p>
+          Svaki red ostaje vezan za konkretan aranžman i vodi na detaljnu stranicu gde se i dalje bira termin, broj
+          putnika i salje demo upit.
+        </p>
+      </div>
+
+      <div class="note-box">
+        <strong>Napomena o cenama.</strong>
+        <p>
+          Prikazane korekcije cena su mock podaci. Ne koristimo laznu hitnost ni nerealne poruke o preostalim mestima
+          van onoga sto je eksplicitno definisano u demo podacima.
+        </p>
+      </div>
+
+      <LastMinuteLedger entries={entries} />
+    </div>
+  </section>
+
+  {packagesWithLastMinute.length > 0 ? (
+    <section class="section section--tight">
+      <div class="container">
+        <div class="page-intro">
+          <p class="eyebrow">POVEZANI ARANZMANI</p>
+          <h2>Otvorite aranžman i nastavite isti flow do rezervacionog upita.</h2>
+        </div>
+        <div class="package-grid">
+          {packagesWithLastMinute.map((item) => <PackageCard item={item} />)}
+        </div>
+      </div>
+    </section>
+  ) : null}
+</BaseLayout>

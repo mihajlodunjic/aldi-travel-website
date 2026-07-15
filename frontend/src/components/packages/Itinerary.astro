@@ -1,0 +1,32 @@
+---
+import type { ItineraryDay } from "@/types/travel";
+
+interface Props {
+  items: ItineraryDay[];
+}
+
+const { items } = Astro.props;
+---
+<div class="detail-card">
+  <div class="section-header">
+    <p class="eyebrow">PROGRAM PUTOVANJA</p>
+    <div class="section-header__copy">
+      <h2>Program po danima</h2>
+    </div>
+    <div class="double-rule" aria-hidden="true"></div>
+  </div>
+  <div class="itinerary-list">
+    {items.map((item) => (
+      <article class="itinerary-item">
+        <div class="itinerary-day">
+          <span class="eyebrow">Dan</span>
+          <strong>{item.day}</strong>
+        </div>
+        <div class="itinerary-content">
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+</div>

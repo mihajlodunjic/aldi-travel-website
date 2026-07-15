@@ -1,0 +1,318 @@
+---
+import DestinationSummaryCard from "@/components/destinations/DestinationSummaryCard.astro";
+import LastMinuteLedger from "@/components/last-minute/LastMinuteLedger.astro";
+import PackageCard from "@/components/packages/PackageCard.astro";
+import TravelSearch from "@/components/search/TravelSearch";
+import SectionHeader from "@/components/ui/SectionHeader.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { agency } from "@/data/agency";
+import { categories } from "@/data/categories";
+import { destinations } from "@/data/destinations";
+import { travelPackages } from "@/data/travelPackages";
+import type { TravelPackage } from "@/types/travel";
+import { formatTravelDateCompact } from "@/utils/dates";
+import {
+  getDestinationPackageCount,
+  getDestinationPriceRange,
+  getLastMinuteDepartures,
+  getNextAvailableDeparture,
+  getPackageStartingPrice,
+  getTransportLabel,
+} from "@/utils/packages";
+import { formatMoney } from "@/utils/pricing";
+
+type DepartureBoardRow = {
+  item: TravelPackage;
+  departure: NonNullable<ReturnType<typeof getNextAvailableDeparture>>;
+};
+
+const heroPackage = travelPackages.find((item) => item.featured) ?? travelPackages[0];
+const heroDestination = destinations.find((item) => item.slug === heroPackage.destinationSlug) ?? destinations[0];
+const featuredStack = travelPackages.filter((item) => item.id !== heroPackage.id && item.featured).slice(0, 2);
+const supportingPackages = travelPackages
+  .filter((item) => item.id !== heroPackage.id && !featuredStack.some((candidate) => candidate.id === item.id))
+  .filter((item) => item.popular || item.new || getLastMinuteDepartures(item).length > 0)
+  .slice(0, 3);
+const departureBoard: DepartureBoardRow[] = travelPackages
+  .map((item) => ({ item, departure: getNextAvailableDeparture(item) }))
+  .filter((row): row is DepartureBoardRow => Boolean(row.departure))
+  .sort((left, right) => left.departure.startDate.localeCompare(right.departure.startDate))
+  .slice(0, 5);
+const lastMinuteEntries = travelPackages
+  .flatMap((item) => getLastMinuteDepartures(item).map((departure) => ({ item, departure })))
+  .sort((left, right) => left.departure.startDate.localeCompare(right.departure.startDate))
+  .slice(0, 6);
+const destinationHighlights = destinations.slice(0, 4);
+const highlightStats = destinationHighlights.map((destination) => ({
+  destination,
+  packageCount: getDestinationPackageCount(destination.slug, travelPackages),
+  priceRange: getDestinationPriceRange(destination.slug, travelPackages),
+}));
+const heroStartingPrice = getPackageStartingPrice(heroPackage);
+const heroNextDeparture = getNextAvailableDeparture(heroPackage);
+---
+<BaseLayout
+  title="Aldi Travel | Demo katalog polazaka i aranžmana"
+  description="Customer-facing demo sajt Aldi Travel sa pretragom destinacija, filtriranjem aranžmana, izborom termina i slanjem demo upita za rezervaciju."
+>
+  <section class="section section--hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">TABLA POLAZAKA / LESKOVAC</p>
+        <h1>Destinaciju birate kroz termin, prevoz, ritam i cenu, ne kroz genericki slogan.</h1>
+        <p>
+          Aldi Travel demo je napravljen kao radna tabla za pronalazenje polazaka. Najpre pretrazujete destinacije i
+          mesece, zatim otvarate konkretan aranžman, birate termin, definisete putnike i pripremate demo upit.
+        </p>
+
+        <div class="hero-data-row">
+          <span class="data-pill">{travelPackages.length} aranžman</span>
+          <span class="data-pill">Autobus, avion i sopstveni prevoz</span>
+          <span class="data-pill">{agency.city}</span>
+        </div>
+
+        <div class="page-actions">
+          <a class="button button--primary" href="/aranzmani">
+            Otvori katalog
+          </a>
+          <a class="button button--secondary" href="/last-minute">
+            Pregledaj last-minute
+          </a>
+        </div>
+
+        <div class="hero-search-shell">
+          <div class="hero-search-shell__top">
+            <div>
+              <strong>Pronadji polazak</strong>
+              <p>Pretraga vodi direktno u katalog sa aktivnim filterima.</p>
+            </div>
+            <p class="utility-note">Centralni flow radi od pretrage do demo upita.</p>
+          </div>
+          <TravelSearch packages={travelPackages} client:load />
+        </div>
+      </div>
+
+      <article class="hero-visual">
+        <img src={heroDestination.heroImage} alt={heroDestination.alt[0] ?? heroDestination.label} width="1800" height="1350" loading="eager" />
+        <div class="hero-caption">
+          <p class="destination-card__kicker">IZDVOJENA DESTINACIJA</p>
+          <h3>{heroPackage.title}</h3>
+          <p>{heroPackage.shortDescription}</p>
+          <div class="hero-caption__meta">
+            <span>{heroDestination.label}</span>
+            <span>{heroNextDeparture ? `Polazak ${formatTravelDateCompact(heroNextDeparture.startDate)}` : "Agent predlaze sledeci termin"}</span>
+            <span>{heroStartingPrice ? `od ${formatMoney(heroStartingPrice.pricePerPerson, heroStartingPrice.currency)}` : "Cena na upit"}</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHeader
+        eyebrow="KAKO SE CITA PONUDA"
+        title="Tabla polazaka i urednicki katalog rade zajedno."
+        text="Fotografija privlaci paznju, ali odluku nose datum, status polaska, vrsta prevoza i informativna cena po osobi."
+      />
+
+      <div class="featured-layout">
+        <article class="editorial-panel">
+          <div>
+            <p class="destination-card__kicker">SLEDECI POLASCI</p>
+            <h3>Najblizi termini ostaju vidljivi visoko u kompoziciji.</h3>
+            <p>
+              U ovom demou nema skrivenih cena i dekorativnih kartica bez funkcije. Svaki red vodi na stranicu
+              aranžmana sa izborom termina i putnika.
+            </p>
+          </div>
+
+          <div class="board-list">
+            {departureBoard.map(({ item, departure }) => (
+              <a class="board-row" href={`/aranzmani/${item.slug}?departure=${departure.id}`}>
+                <div>
+                  <strong>{item.title}</strong>
+                  <p>{item.destination} / {item.country}</p>
+                </div>
+                <span class="mono-date">{formatTravelDateCompact(departure.startDate)}</span>
+                <span>{getTransportLabel(item.transportType)}</span>
+                <strong>{formatMoney(departure.pricePerPerson, departure.currency)}</strong>
+              </a>
+            ))}
+          </div>
+        </article>
+
+        <div class="featured-layout__stack">
+          {featuredStack.map((item) => <PackageCard item={item} />)}
+        </div>
+      </div>
+
+      <div class="package-grid package-grid--spaced">
+        {supportingPackages.map((item) => <PackageCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHeader
+        eyebrow="KOREKCIJE CENA"
+        title="Last-minute redovi nisu zaseban promo svet, vec deo istog kataloga."
+        text="Svaki last-minute termin ostaje povezan sa konkretnim aranžmanom, datumom polaska i novom cenom."
+      />
+      <LastMinuteLedger entries={lastMinuteEntries} />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHeader
+        eyebrow="DESTINACIJE"
+        title="Pregled destinacija ima urednicki ritam, ali i dalje vodi u funkcionalan katalog."
+        text="Svaka destinacija dobija sopstvenu stranicu sa uvodom, raspolozivim mesecima, cenovnim opsegom i pripadajucim aranžmanima."
+      />
+
+      <div class="destination-mosaic">
+        <a class="destination-mosaic__feature" href={`/destinacije/${highlightStats[0].destination.slug}`}>
+          <img
+            src={highlightStats[0].destination.heroImage}
+            alt={highlightStats[0].destination.alt[0] ?? highlightStats[0].destination.label}
+            width="1600"
+            height="2000"
+            loading="lazy"
+          />
+          <div class="destination-card__caption">
+            <p class="destination-card__kicker">{String(highlightStats[0].packageCount).padStart(2, "0")} aranžmana</p>
+            <h3>{highlightStats[0].destination.label}</h3>
+            <p>
+              {highlightStats[0].priceRange.min
+                ? `Polasci od ${formatMoney(highlightStats[0].priceRange.min.pricePerPerson, highlightStats[0].priceRange.min.currency)} po osobi.`
+                : "Cena se potvrđuje nakon izbora termina."}
+            </p>
+          </div>
+        </a>
+
+        <div class="destination-mosaic__stack">
+          {highlightStats.slice(1).map(({ destination, packageCount, priceRange }) => (
+            <article>
+              <a href={`/destinacije/${destination.slug}`}>
+                <img src={destination.heroImage} alt={destination.alt[0] ?? destination.label} width="1600" height="1000" loading="lazy" />
+                <div class="destination-card__caption">
+                  <p class="destination-card__kicker">{String(packageCount).padStart(2, "0")} aranžmana</p>
+                  <h3>{destination.label}</h3>
+                  <p>{priceRange.min ? `od ${formatMoney(priceRange.min.pricePerPerson, priceRange.min.currency)}` : "Cena na upit"}</p>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="destination-summary-grid destination-summary-grid--spaced">
+        {destinations.slice(4, 8).map((destination) => (
+          <DestinationSummaryCard destination={destination} packages={travelPackages} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHeader
+        eyebrow="KATEGORIJE"
+        title="Vrste putovanja imaju svoj indeks, a ne genericki red kartica."
+        text="Kategorije služe kao brz ulaz u katalog za korisnike koji najpre znaju tip putovanja, a tek potom biraju konkretnu destinaciju."
+      />
+
+      <ol class="category-index">
+        {categories.map((category) => (
+          <li>
+            <span>{category.index}</span>
+            <div>
+              <strong>{category.label}</strong>
+              <p>{category.description}</p>
+            </div>
+            <a href={category.href}>Otvori</a>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <SectionHeader
+        eyebrow="CENTRALNI FLOW"
+        title="Pretraga, izbor termina i demo upit rade kao jedan proizvodni tok."
+        text="Nijedna kljucna kontrola nije samo dekoracija. Korisnik moze da prodje kroz ceo scenario bez napustanja smislenog putanja."
+      />
+
+      <div class="process-line">
+        <article class="process-step">
+          <span>01</span>
+          <h3>Pronadji destinaciju</h3>
+          <p>Pretraga po destinaciji ili drzavi vodi u katalog sa aktivnim parametrima.</p>
+        </article>
+        <article class="process-step">
+          <span>02</span>
+          <h3>Filtriraj ponudu</h3>
+          <p>U katalogu radite po mesecu, kategoriji, prevozu i uporednoj ceni.</p>
+        </article>
+        <article class="process-step">
+          <span>03</span>
+          <h3>Otvori aranžman</h3>
+          <p>Detaljna stranica spaja galeriju, program, ukljuceno i raspolozive polaske.</p>
+        </article>
+        <article class="process-step">
+          <span>04</span>
+          <h3>Izaberi termin</h3>
+          <p>Status, datum i informativna cena menjaju sazetak na booking panelu.</p>
+        </article>
+        <article class="process-step">
+          <span>05</span>
+          <h3>Posalji demo upit</h3>
+          <p>Forma proverava obavezna polja i potvrđuje da je upit pripremljen.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container agency-block">
+      <div class="agency-block__brand">
+        <a class="brand-link" href="/" aria-label="Aldi Travel pocetna">
+          <span class="brand-link__logo">
+            <img src={agency.logoPath} alt="" width="1080" height="1080" loading="lazy" />
+          </span>
+          <span class="brand-link__text">
+            <strong class="brand-link__name">{agency.name}</strong>
+            <span class="brand-link__city">{agency.slogan}</span>
+          </span>
+        </a>
+        <p>{agency.notice}</p>
+        <p>
+          Kontakt u ovom demou ostaje lokalno jasan: {agency.city}, {agency.phones[0].value}, {agency.email.value}.
+        </p>
+        <div class="page-actions">
+          <a class="button button--primary" href="/kontakt">
+            Kontakt i mreze
+          </a>
+          <a class="button button--secondary" href="/sacuvano">
+            Otvori sacuvane aranžmane
+          </a>
+        </div>
+      </div>
+
+      <div class="final-cta-panel">
+        <p class="eyebrow">STA DEMO VEC RESAVA</p>
+        <h3>Customer-facing demo nije samo naslovna strana, vec mini platforma za izbor polaska.</h3>
+        <ul class="stack-list">
+          <li>Pronalaženje destinacija kroz pretragu, kategorije i urednicke ulaze.</li>
+          <li>Filtriranje i sortiranje po mesecu, tipu putovanja, vrsti prevoza i ceni.</li>
+          <li>Izbor konkretnog termina sa statusom raspolozivosti i informativnim obracunom.</li>
+          <li>Cuvanje aranžmana i priprema kontekstualnog demo upita za rezervaciju.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

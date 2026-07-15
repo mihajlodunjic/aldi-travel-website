@@ -1,0 +1,38 @@
+---
+import type { Accommodation } from "@/types/travel";
+
+interface Props {
+  accommodation?: Accommodation;
+}
+
+const { accommodation } = Astro.props;
+---
+{accommodation ? (
+  <section class="detail-card">
+    <div class="section-header">
+      <p class="eyebrow">SMEŠTAJ</p>
+      <div class="section-header__copy">
+        <h2>{accommodation.name}</h2>
+        <p>{accommodation.description}</p>
+      </div>
+      <div class="double-rule" aria-hidden="true"></div>
+    </div>
+    <div class="detail-columns">
+      <div class="list-block">
+        <h3>Osnovno</h3>
+        <ul>
+          <li>{accommodation.city}</li>
+          {accommodation.board ? <li>{accommodation.board}</li> : null}
+          {accommodation.category ? <li>{accommodation.category}</li> : null}
+          <li>Demo podatak za prezentaciju sajta</li>
+        </ul>
+      </div>
+      <div class="list-block">
+        <h3>Pogodnosti</h3>
+        <ul>
+          {accommodation.amenities.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+) : null}

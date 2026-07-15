@@ -1,0 +1,24 @@
+---
+import PackageCard from "@/components/packages/PackageCard.astro";
+import type { TravelPackage } from "@/types/travel";
+
+interface Props {
+  items: TravelPackage[];
+}
+
+const { items } = Astro.props;
+---
+{items.length > 0 ? (
+  <section class="section section--tight">
+    <div class="section-header">
+      <p class="eyebrow">POVEZANI ARANŽMANI</p>
+      <div class="section-header__copy">
+        <h2>Još polazaka u istom kontekstu</h2>
+      </div>
+      <div class="double-rule" aria-hidden="true"></div>
+    </div>
+    <div class="package-grid">
+      {items.map((item) => <PackageCard item={item} />)}
+    </div>
+  </section>
+) : null}

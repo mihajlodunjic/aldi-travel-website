@@ -1,0 +1,40 @@
+---
+import SavedCountBadge from "@/components/favorites/SavedCountBadge";
+import MobileNavigation from "@/components/layout/MobileNavigation";
+import { agency } from "@/data/agency";
+import { navigation } from "@/data/navigation";
+
+const pathname = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand-link" href="/" aria-label="Aldi Travel — početna">
+      <span class="brand-link__logo">
+        <img src={agency.logoPath} alt="" width="1080" height="1080" loading="eager" />
+      </span>
+      <span class="brand-link__text">
+        <strong class="brand-link__name">{agency.name}</strong>
+        <span class="brand-link__city">{agency.city}</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Glavna navigacija">
+      {navigation.map((item) => (
+        <a href={item.href} aria-current={pathname === item.href ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="site-header__aside">
+      <a class="saved-link" href="/sacuvano">
+        <span>Sačuvano</span>
+        <SavedCountBadge client:load />
+      </a>
+      <a class="header-contact" href={`tel:${agency.phones[0].value.replace(/[^\d+]/g, "")}`}>
+        {agency.phones[0].value}
+      </a>
+      <MobileNavigation client:load />
+    </div>
+  </div>
+</header>

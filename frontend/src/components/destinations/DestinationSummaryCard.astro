@@ -1,0 +1,59 @@
+---
+import type { Destination, TravelPackage } from "@/types/travel";
+import { formatTravelDateCompact, formatTravelMonth } from "@/utils/dates";
+import {
+  getDestinationMonthlyAvailability,
+  getDestinationPackageCount,
+  getDestinationPriceRange,
+  getNextAvailableDeparture,
+} from "@/utils/packages";
+import { formatMoney } from "@/utils/pricing";
+
+interface Props {
+  destination: Destination;
+  packages: TravelPackage[];
+}
+
+const { destination, packages } = Astro.props;
+const items = packages.filter((item) => item.destinationSlug === destination.slug);
+const packageCount = getDestinationPackageCount(destination.slug, packages);
+const priceRange = getDestinationPriceRange(destination.slug, packages);
+const months = getDestinationMonthlyAvailability(destination.slug, packages).slice(0, 4);
+const nextDeparture = items
+  .map((item) => getNextAvailableDeparture(item))
+  .filter(Boolean)
+  .sort((left, right) => left!.startDate.localeCompare(right!.startDate))[0];
+---
+<article class="destination-summary">
+  <img src={destination.heroImage} alt={destination.alt[0] ?? destination.label} width="1200" height="900" loading="lazy" />
+  <div class="destination-summary__body">
+    <div class="destination-summary__header">
+      <p class="destination-card__kicker">{String(packageCount).padStart(2, "0")} aranžmana</p>
+      <h3>{destination.name}</h3>
+      <p>{destination.intro}</p>
+    </div>
+
+    <div class="destination-summary__meta">
+      <span>{destination.country}</span>
+      <span>{nextDeparture ? `Sledeci polazak ${formatTravelDateCompact(nextDeparture.startDate)}` : "Bez aktivnog polaska"}</span>
+      <span>{priceRange.min ? `od ${formatMoney(priceRange.min.pricePerPerson, priceRange.min.currency)}` : "Cena na upit"}</span>
+    </div>
+
+    {months.length > 0 ? (
+      <div class="month-chip-row">
+        {months.map((month) => (
+          <span class="month-chip">{formatTravelMonth(month)}</span>
+        ))}
+      </div>
+    ) : null}
+
+    <div class="inline-link-row">
+      <a class="button button--primary" href={`/destinacije/${destination.slug}`}>
+        Otvori destinaciju
+      </a>
+      <a class="button button--secondary" href={`/aranzmani?destination=${encodeURIComponent(destination.name)}`}>
+        Prikazi aranžmane
+      </a>
+    </div>
+  </div>
+</article>

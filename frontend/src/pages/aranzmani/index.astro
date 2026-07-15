@@ -1,0 +1,58 @@
+---
+import PackageCatalog from "@/components/packages/PackageCatalog";
+import Breadcrumbs from "@/components/ui/Breadcrumbs.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { travelPackages } from "@/data/travelPackages";
+import { categories } from "@/data/categories";
+
+const monthCount = new Set(
+  travelPackages.flatMap((item) => item.departures.map((departure) => departure.startDate.slice(0, 7))),
+).size;
+---
+<BaseLayout
+  title="Aranzmani i polasci | Aldi Travel demo"
+  description="Katalog aranžmana Aldi Travel sa funkcionalnim filtriranjem, sortiranjem, cuvanjem aranžmana i odlaskom na detaljnu stranicu."
+>
+  <section class="section section--tight">
+    <div class="container">
+      <Breadcrumbs items={[{ href: "/", label: "Pocetna" }, { label: "Aranzmani" }]} />
+
+      <div class="page-intro">
+        <p class="eyebrow">KATALOG POLAZAKA</p>
+        <h1>Aranzmani koje mozete stvarno da pretrazite, filtrirate i otvorite.</h1>
+        <p>
+          Katalog objedinjuje autobuske, avionske i individualne polaske. Filteri rade nad terminima i cenama, a svaka
+          kartica vodi u detalj sa izborom termina i putnika.
+        </p>
+      </div>
+
+      <div class="stat-grid">
+        <article class="stat-card">
+          <p class="eyebrow">UKUPNO U KATALOGU</p>
+          <h3>{travelPackages.length}</h3>
+          <p>Aktivni demo aranžmani raspoređeni kroz vise tipova putovanja.</p>
+        </article>
+        <article class="stat-card">
+          <p class="eyebrow">KATEGORIJE</p>
+          <h3>{categories.length}</h3>
+          <p>Letovanje, city break, evropski gradovi, daleke destinacije, izleti i zimovanje.</p>
+        </article>
+        <article class="stat-card">
+          <p class="eyebrow">MESECI POLAZAKA</p>
+          <h3>{monthCount}</h3>
+          <p>Termini su raspoređeni kroz letnju, jesenju i zimsku demo ponudu.</p>
+        </article>
+      </div>
+
+      <div class="note-box note-box--spaced">
+        <strong>Napomena o demo podacima.</strong>
+        <p>
+          Prikazane cene, raspolozivost i termini sluze demonstraciji rada kataloga. Produkciona verzija bi ovde
+          koristila potvrđene komercijalne podatke agencije.
+        </p>
+      </div>
+
+      <PackageCatalog packages={travelPackages} client:load />
+    </div>
+  </section>
+</BaseLayout>

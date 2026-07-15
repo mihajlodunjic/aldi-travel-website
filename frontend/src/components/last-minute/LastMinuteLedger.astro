@@ -1,0 +1,62 @@
+---
+import type { Departure, TravelPackage } from "@/types/travel";
+import { formatTravelDateCompact } from "@/utils/dates";
+import { getLastMinuteDiscount, getTransportLabel } from "@/utils/packages";
+import { formatMoney } from "@/utils/pricing";
+
+interface LedgerEntry {
+  item: TravelPackage;
+  departure: Departure;
+}
+
+interface Props {
+  entries: LedgerEntry[];
+  emptyTitle?: string;
+  emptyText?: string;
+}
+
+const {
+  entries,
+  emptyTitle = "Trenutno nema aktivnih last-minute termina.",
+  emptyText = "Kada demo podaci ukljuce korekciju cene i aktivan polazak, bice prikazani ovde.",
+} = Astro.props;
+---
+{entries.length > 0 ? (
+  <div class="last-minute-ledger">
+    <div class="last-minute-row last-minute-row--head" aria-hidden="true">
+      <span>Aranzman</span>
+      <span>Polazak</span>
+      <span>Prevoz</span>
+      <span>Pre</span>
+      <span>Sada</span>
+      <span>Usteda</span>
+    </div>
+    {entries.map(({ item, departure }) => {
+      const discount = getLastMinuteDiscount(departure);
+
+      return (
+        <article class="last-minute-row">
+          <div>
+            <a href={`/aranzmani/${item.slug}?departure=${departure.id}`}>
+              <strong>{item.title}</strong>
+            </a>
+            <p>{item.destination} / {item.country}</p>
+          </div>
+          <span class="mono-date">{formatTravelDateCompact(departure.startDate)}</span>
+          <span>{getTransportLabel(item.transportType)}</span>
+          <span>{departure.previousPrice ? formatMoney(departure.previousPrice, departure.currency) : "—"}</span>
+          <strong>{formatMoney(departure.pricePerPerson, departure.currency)}</strong>
+          <span class="discount">{discount ? `-${discount}%` : "—"}</span>
+        </article>
+      );
+    })}
+  </div>
+) : (
+  <div class="empty-state">
+    <h2>{emptyTitle}</h2>
+    <p>{emptyText}</p>
+    <a class="button button--secondary" href="/aranzmani">
+      Pogledaj ceo katalog
+    </a>
+  </div>
+)}

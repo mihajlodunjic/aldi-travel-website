@@ -80,16 +80,6 @@ const heroNextDeparture = getNextAvailableDeparture(heroPackage);
           </a>
         </div>
 
-        <div class="hero-search-shell">
-          <div class="hero-search-shell__top">
-            <div>
-              <strong>Pronadji polazak</strong>
-              <p>Pretraga vodi direktno u katalog sa aktivnim filterima.</p>
-            </div>
-            <p class="utility-note">Centralni flow radi od pretrage do demo upita.</p>
-          </div>
-          <TravelSearch packages={travelPackages} client:load />
-        </div>
       </div>
 
       <article class="hero-visual">
@@ -105,6 +95,17 @@ const heroNextDeparture = getNextAvailableDeparture(heroPackage);
           </div>
         </div>
       </article>
+
+      <div class="hero-search-shell">
+        <div class="hero-search-shell__top">
+          <div>
+            <strong>Pronadji polazak</strong>
+            <p>Pretraga vodi direktno u katalog sa aktivnim filterima.</p>
+          </div>
+          <p class="utility-note">Centralni flow radi od pretrage do demo upita.</p>
+        </div>
+        <TravelSearch packages={travelPackages} client:load />
+      </div>
     </div>
   </section>
 

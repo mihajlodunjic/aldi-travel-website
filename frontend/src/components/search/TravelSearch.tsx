@@ -1,7 +1,7 @@
 import { useMemo, useState, type ComponentProps } from "react";
 import type { TravelPackage } from "@/types/travel";
-import { getTravelerSummary } from "@/utils/filters";
 import { formatTravelMonth } from "@/utils/dates";
+import { getTravelerSummary } from "@/utils/filters";
 
 type TravelSearchProps = {
   packages: TravelPackage[];
@@ -38,8 +38,8 @@ export default function TravelSearch({ packages }: TravelSearchProps) {
   function handleSubmit(event: FormSubmitEvent) {
     event.preventDefault();
     const params = new URLSearchParams();
-
     const trimmed = destination.trim();
+
     if (trimmed) {
       const matchedCountry = options.countries.find(
         (item) => item.toLocaleLowerCase("sr-Latn-RS") === trimmed.toLocaleLowerCase("sr-Latn-RS"),
@@ -61,13 +61,13 @@ export default function TravelSearch({ packages }: TravelSearchProps) {
 
   return (
     <form className="travel-search" onSubmit={handleSubmit}>
-      <div className="field">
-        <label htmlFor="hero-destination">Destinacija ili država</label>
+      <div className="field travel-search__field">
+        <label htmlFor="hero-destination">Destinacija ili drzava</label>
         <input
           id="hero-destination"
           name="destination"
           list="travel-search-options"
-          placeholder="Gde želite da putujete?"
+          placeholder="Gde zelite da putujete?"
           value={destination}
           onChange={(event) => setDestination(event.target.value)}
         />
@@ -81,7 +81,7 @@ export default function TravelSearch({ packages }: TravelSearchProps) {
         </datalist>
       </div>
 
-      <div className="field">
+      <div className="field travel-search__field">
         <label htmlFor="hero-month">Mesec putovanja</label>
         <select id="hero-month" name="month" value={month} onChange={(event) => setMonth(event.target.value)}>
           <option value="">Svi meseci</option>
@@ -93,7 +93,7 @@ export default function TravelSearch({ packages }: TravelSearchProps) {
         </select>
       </div>
 
-      <div className="field traveler-popover">
+      <div className="field traveler-popover travel-search__field">
         <label htmlFor="hero-travelers">Odrasli i deca</label>
         <button
           id="hero-travelers"
@@ -114,10 +114,10 @@ export default function TravelSearch({ packages }: TravelSearchProps) {
               </div>
               <div className="traveler-stepper__controls">
                 <button type="button" aria-label="Smanji broj odraslih" onClick={() => updateCount("adults", -1)}>
-                  −
+                  -
                 </button>
                 <strong>{adults}</strong>
-                <button type="button" aria-label="Povećaj broj odraslih" onClick={() => updateCount("adults", 1)}>
+                <button type="button" aria-label="Povecaj broj odraslih" onClick={() => updateCount("adults", 1)}>
                   +
                 </button>
               </div>
@@ -129,10 +129,10 @@ export default function TravelSearch({ packages }: TravelSearchProps) {
               </div>
               <div className="traveler-stepper__controls">
                 <button type="button" aria-label="Smanji broj dece" onClick={() => updateCount("children", -1)}>
-                  −
+                  -
                 </button>
                 <strong>{children}</strong>
-                <button type="button" aria-label="Povećaj broj dece" onClick={() => updateCount("children", 1)}>
+                <button type="button" aria-label="Povecaj broj dece" onClick={() => updateCount("children", 1)}>
                   +
                 </button>
               </div>
@@ -141,9 +141,11 @@ export default function TravelSearch({ packages }: TravelSearchProps) {
         ) : null}
       </div>
 
-      <button className="button button--primary" type="submit">
-        Pronađi aranžmane
-      </button>
+      <div className="travel-search__actions">
+        <button className="button button--primary travel-search__submit" type="submit">
+          Pronadi aranzmane
+        </button>
+      </div>
     </form>
   );
 }

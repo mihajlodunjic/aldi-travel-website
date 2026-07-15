@@ -314,16 +314,17 @@ main {
 }
 
 .hero-search-shell {
-  margin-top: 28px;
+  grid-column: 1 / -1;
+  margin-top: 4px;
   border: 1px solid var(--color-line-strong);
   background: var(--color-white);
 }
 
 .hero-search-shell__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px 24px;
   padding: 18px 20px 12px;
   border-bottom: 1px solid var(--color-line);
 }
@@ -334,9 +335,15 @@ main {
 
 .travel-search {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr) minmax(200px, 1fr) auto;
-  gap: 12px;
+  grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr) minmax(0, 1.1fr) minmax(220px, 0.95fr);
+  gap: 16px 18px;
+  align-items: end;
   padding: 18px 20px 20px;
+}
+
+.travel-search__field,
+.travel-search__actions {
+  min-width: 0;
 }
 
 .field,
@@ -349,13 +356,14 @@ main {
 .fieldset-compact legend {
   font-size: 14px;
   color: var(--color-ink);
+  line-height: 1.35;
 }
 
 .field input,
 .field select,
 .field textarea,
 .fieldset-compact input {
-  min-height: 48px;
+  min-height: 54px;
   width: 100%;
   border: 1px solid var(--color-line-strong);
   border-radius: var(--radius-sm);
@@ -374,7 +382,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 48px;
+  width: 100%;
+  min-height: 54px;
   border: 1px solid var(--color-line-strong);
   border-radius: var(--radius-sm);
   background: var(--color-paper);
@@ -395,6 +404,16 @@ main {
   background: var(--color-white);
   padding: 16px;
   box-shadow: var(--shadow-soft);
+}
+
+.travel-search__actions {
+  display: flex;
+  align-items: end;
+}
+
+.travel-search__submit {
+  width: 100%;
+  min-height: 54px;
 }
 
 .traveler-stepper {
@@ -1260,10 +1279,6 @@ main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .travel-search {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .catalog-shell,
   .detail-content-grid,
   .agency-block,
@@ -1279,6 +1294,16 @@ main {
 
   .booking-panel {
     position: static;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-search-shell__top {
+    grid-template-columns: 1fr;
+  }
+
+  .travel-search {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -1431,7 +1456,6 @@ main {
     aspect-ratio: 4 / 3;
   }
 
-  .travel-search,
   .last-minute-row,
   .board-row,
   .stat-grid,
@@ -1538,7 +1562,8 @@ main {
   }
 
   .page-actions .button,
-  .inline-link-row .button {
+  .inline-link-row .button,
+  .travel-search__submit {
     width: 100%;
   }
 

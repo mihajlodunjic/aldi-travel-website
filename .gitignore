@@ -3,3 +3,4 @@ frontend/dist/
 frontend/.astro
 docs/
 .agents/
+.playwright-mcp/

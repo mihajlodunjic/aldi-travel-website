@@ -1,32 +1,45 @@
-import { useEffect, useId, useRef, useState } from "react";
-import SavedCountBadge from "@/components/favorites/SavedCountBadge";
+import { useEffect, useRef, useState } from "react";
 import { navigation } from "@/data/navigation";
 
 export default function MobileNavigation() {
   const [open, setOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const titleId = useId();
+
+  function closeMenu(restoreFocus = false) {
+    setOpen(false);
+
+    if (restoreFocus) {
+      window.setTimeout(() => menuButtonRef.current?.focus(), 0);
+    }
+  }
 
   useEffect(() => {
-    if (!open) return;
-
-    const firstLink = dialogRef.current?.querySelector<HTMLAnchorElement>("a");
-    firstLink?.focus();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const html = document.documentElement;
+    const body = document.body;
+    const previousBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = html.style.overflow;
+    const previousBodyTouchAction = body.style.touchAction;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-        menuButtonRef.current?.focus();
-      }
+      if (event.key === "Escape") closeMenu(true);
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    if (open) {
+      const firstLink = dialogRef.current?.querySelector<HTMLAnchorElement>("a");
+      firstLink?.focus();
+      body.classList.add("mobile-menu-open");
+      body.style.overflow = "hidden";
+      body.style.touchAction = "none";
+      html.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    }
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      body.classList.remove("mobile-menu-open");
+      body.style.overflow = previousBodyOverflow;
+      body.style.touchAction = previousBodyTouchAction;
+      html.style.overflow = previousHtmlOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [open]);
@@ -37,43 +50,36 @@ export default function MobileNavigation() {
         ref={menuButtonRef}
         type="button"
         className="mobile-menu-button"
+        aria-label={open ? "Zatvori meni" : "Otvori meni"}
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
-        onClick={() => setOpen(true)}
+        onClick={() => setOpen((value) => !value)}
       >
-        <span aria-hidden="true">Meni</span>
-        <SavedCountBadge />
+        <span className="visually-hidden">{open ? "Zatvori meni" : "Otvori meni"}</span>
+        <span className="mobile-menu-button__icon" aria-hidden="true">
+          <span className="mobile-menu-button__line" />
+          <span className="mobile-menu-button__line" />
+          <span className="mobile-menu-button__line" />
+        </span>
       </button>
 
       {open ? (
-        <div className="mobile-nav-backdrop" role="presentation" onClick={() => setOpen(false)}>
+        <div
+          ref={dialogRef}
+          id="mobile-nav-panel"
+          className="mobile-nav-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobilna navigacija"
+        >
           <div
-            ref={dialogRef}
-            id="mobile-nav-panel"
-            className="mobile-nav-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}
-            onClick={(event) => event.stopPropagation()}
+            className="mobile-nav-panel__inner"
           >
-            <div className="mobile-nav-panel__header">
-              <h2 id={titleId}>Navigacioni indeks</h2>
-              <button
-                type="button"
-                className="mobile-nav-panel__close"
-                onClick={() => {
-                  setOpen(false);
-                  menuButtonRef.current?.focus();
-                }}
-              >
-                Zatvori meni
-              </button>
-            </div>
             <nav aria-label="Mobilna navigacija">
               <ul className="mobile-nav-list">
                 {navigation.map((item) => (
                   <li key={item.href}>
-                    <a href={item.href} onClick={() => setOpen(false)}>
+                    <a href={item.href} onClick={() => closeMenu()}>
                       <span>{item.index}</span>
                       <strong>{item.label}</strong>
                     </a>
